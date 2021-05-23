@@ -1,0 +1,13 @@
+/* .fixHeight{
+    height:70vh;
+}
+.image{
+    max-height:70vh;
+} */
+.carousel-control-prev-icon,
+  .carousel-control-next-icon{
+    filter: invert(1)
+  }
+.carousel-indicators li{
+    background-color: #000;
+}

@@ -1,0 +1,100 @@
+.sub{
+    font-size: 1.2em;
+    padding:0.6em 0;
+    font-weight: 600;
+    text-transform: capitalize;
+    text-align: left;
+    white-space: wrap;
+    text-overflow: ellipsis;
+    min-width: fit-content;
+}
+.removePadding{
+    padding: 0px;
+}
+.App .visibilityAccordance{
+    padding:0px;
+    text-align:left;
+}
+
+.body2{
+    font-size: 1em;
+    padding-top:0.6em;
+    padding-left:0;
+    margin:0;
+    text-transform: capitalize;
+    text-align: left;
+    max-width: fit-content;
+}
+.subCard{
+    font-weight: 700;
+    font-size: 1.3em;
+    padding:0;
+    font-family: 'DM Serif Display', serif;
+    text-transform: capitalize;
+    text-align: left;
+}
+.body2Card{
+    font-weight:400;
+    font-family: 'Jura', sans-serif;
+    text-transform: capitalize;
+    text-align: left;
+
+}
+.visibilityAccordance{
+    border:3px lightgray solid;
+    border-radius: 10px;
+}
+.visibilityAccordance .image{
+    min-height:100px;
+    border-radius: 10px;
+    max-height: 150px;
+    width: 200px;
+}
+
+.visibilityAccess .image{
+    height:200px;
+}
+.fa.fa-heart-padding{
+    padding:0;
+} 
+.image{
+    padding: 0;
+}
+body{
+    min-width: 848px;
+}
+/* @media screen and (max-width:1179px){
+    .col-xl-3{
+        width:400px;
+    }
+}
+@media screen and (max-width:1363px){
+    .col-xl-3{
+        width:400px;
+    }
+} */
+/*
+@media screen and (min-width:982px){
+    .visibilityAccordance{
+        display: none;
+    }
+    
+}
+
+@media screen and (max-width:981px){
+    .visibilityAccess{
+        display: none;
+    }
+
+}*/
+
+/*
+@media screen and (min-width:982px){
+    .visibilityAccess{
+        display: inline-block;
+    }
+    .image{
+        height:38vh;;
+    }
+    
+}*/

@@ -1,0 +1,62 @@
+.sideBar{
+    background-color:rgba(0, 0, 0,0.7);
+    height:100vh;
+    top:0;
+    z-index:3;
+    right:-130px;
+    position:fixed;
+    cursor: pointer;
+}
+.sideBar:hover{
+    animation: ex;
+    animation-duration: 0.1s;
+    animation-iteration-count: initial;
+    animation-fill-mode: forwards;
+}
+
+
+@keyframes ex{
+    0%   {right:-40px;}
+    20%  {right:-30px}
+    40%  {right:-20px}
+    80% {right:-10px}
+    100% {right:0px;}
+}
+.sidebarIcon{
+    color:white;
+    padding-top:50px;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.custom-icon{
+    position: absolute;
+    margin-top: 50vh;
+    left:-22px;
+    color:cornflowerblue;
+    padding: 3px;
+    animation-name: arrowScale;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-delay: 0s;
+    z-index: 1;
+
+}
+.backofarrow{
+    position: absolute;
+    margin-top: 49.5vh;
+    left:-22px;
+    width:22px;
+    height: 50px;
+    background-color: rgba(0, 0, 0,0.7);
+    border-top-left-radius: 2.5pc;
+    border-bottom-left-radius: 2.5pc;
+}
+
+@keyframes arrowScale{
+    from{
+        transform: scale(1.2);
+    }
+    to{
+        transform: scale(1);
+    }
+}

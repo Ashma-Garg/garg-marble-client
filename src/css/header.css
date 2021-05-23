@@ -1,0 +1,29 @@
+.nav-link{
+    margin: 0 10px 0 10px;
+    font-size: 1.5em;
+}
+
+.dropdown-item:hover{
+    box-shadow: 10px 50px 18px #888888 inset;
+}
+.drop1:hover{
+    color:white;
+}
+.navbar-custom{
+    background-color: #1c1b1b;
+    font-family: 'Acme', sans-serif; 
+    z-index: 3;
+}
+/* @media screen and (max-width:992px) {
+    #search {
+      display:none;
+    }
+} */
+.shopName{
+      font-size: 2rem;
+      padding-right:4pc;
+}
+.setStyling{
+    color:white;
+    margin:0 20px;
+}

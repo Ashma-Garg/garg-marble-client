@@ -1,0 +1,38 @@
+.sliderr{
+    font-size: 5vh;
+    position:absolute;
+    /* top:70%; */
+    bottom: 0%;
+    z-index: 2;
+    font-family: 'Berkshire Swash', cursive;
+    color: white;
+    animation-name: slide;
+    animation-duration:  2s;
+    animation-iteration-count:initial;
+    animation-fill-mode: forwards;
+}
+.overlay{
+    width:98.5%;
+    height:100vh;
+    position: absolute;
+    z-index:1;
+    background-color: rgba(0,0,0,0.3);
+}
+.mdbcolsd{
+    width:90%;
+    color:white;
+    position:absolute;
+    bottom:60%;
+    z-index:2;
+    background: transparent;
+}
+
+@keyframes slide{
+    from{
+        transform: scale(2);
+    }
+    to{
+        bottom:10%;
+        transform: scale(1.5);
+    }
+}

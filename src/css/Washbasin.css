@@ -1,0 +1,33 @@
+
+.animateWishlistButton{
+    animation: animateButton 1s ease;
+}
+.animateId{
+    display: none;
+    visibility: hidden;
+}
+.animateRow{
+    z-index: 0;
+}
+.animateRowZIndex{
+    animation: animateRowZIndex 2s ease;
+}
+@keyframes animateRowZIndex {
+    from{
+        z-index:3
+    }
+    to{
+        z-index:0
+    }
+    
+}
+@keyframes animateButton {
+    from{
+        transform:scale(3);
+    }
+    to{
+        transform:scale(1);
+        visibility: visible;
+        margin-left:1300px;
+    }
+}

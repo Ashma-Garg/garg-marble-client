@@ -1,0 +1,42 @@
+.manageHeight{
+    height:90vh;
+    margin:1pc 0pc;
+}
+.image{
+    width:100%;
+    height: 86vh;
+    padding:0.5pc;
+}
+h2{
+    text-transform: capitalize;
+}
+.custom-circle{
+    width:80px;
+    height:80px;
+    padding:15px;
+    border:1px solid black
+}
+h3{
+    margin:1em 0;
+}
+.bg-warning{
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
+    padding:1pc;
+}
+.btn-outline-warning,.btn-outline-secondary{
+    background-color: white;
+}
+.fa-shopping-bag{
+    color:black;
+    padding:0 20px;
+}
+.custom-fa-heart{
+    color:black;
+    margin:0 20px;
+}
+.rowSize{
+    transition:0.7s ease;
+}
+.searchBar{
+    transition: 0.7s ease;
+}

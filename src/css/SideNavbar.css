@@ -1,0 +1,58 @@
+  .menu {
+    /* background: #34495e; */
+    background: #201f1f;
+    height: 100%;
+    min-width: 218px;
+    opacity:1; 
+    position: fixed;
+    visibility: visible;
+    z-index:1;
+    overflow-x:auto;
+    left:-300px;
+  }
+  .active{
+      left:0px;
+      transition: 1s ease;
+  }
+
+  .custom-color{
+      /* background-color: #34495e; */
+      background-color: #201f1f;
+  }
+  
+.sideNavUL li a {
+      color: #fff;
+      text-decoration: none;
+      display: block;
+      padding: 20px;
+}
+  
+.sideNavUL {
+      padding: 0;
+      margin: 0;
+      height:100%;
+}
+  
+.sideNavUL li {
+        display:block;
+        font-size: 16px;
+        border-bottom: 1px solid #fff;
+        animation: fadeInRight 3s ease forwards;
+        opacity:0;
+      }
+
+  @keyframes fadeInRight {
+    0% {
+      opacity: 0;
+      left: 10%;
+    }
+    100% {
+      opacity: 1;
+      left: 0;
+    }
+  }
+  
+  #business{
+      font-size: 1.5rem;
+      height:10pc;
+  }
