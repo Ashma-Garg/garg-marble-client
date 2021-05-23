@@ -22,7 +22,7 @@ class WashbasinBrand extends Component{
     }
     componentDidMount(){
         var array=this.props.match.params.brand.split(',')
-        Axios.get(`https://garg-marble-server.herokuapp.com/${this.props.match.params.category}/${array}`)
+        Axios.get(`http://localhost:2409/${this.props.match.params.category}/${array}`)
         .then(res=>{
             this.setState({
                 brandProduct: res.data.map((p, i) => {

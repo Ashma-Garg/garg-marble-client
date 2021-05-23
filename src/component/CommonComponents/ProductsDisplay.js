@@ -41,12 +41,11 @@ class ProductDisplay extends Component {
         let category=this.props.category
         if(customerId){        
             var color=window.getComputedStyle(document.getElementById(e.target.id), null).getPropertyValue('color')
-            console.log(color)
-            axios.post(`https://garg-marble-server.herokuapp.com/customer/wishlist`,{customerId,productId,color,category})
+            axios.post(`http://localhost:2409/customer/wishlist`,{customerId,productId,color,category})
             .then(res=>{
                     return;
             })
-            axios.post(`https://garg-marble-server.herokuapp.com/${this.props.category}/addCustomer`,{productId,customerId,color})
+            axios.post(`http://localhost:2409/${this.props.category}/addCustomer`,{productId,customerId,color})
             .then(res=>{
                 if (res.data.message) {
                     this.setState({

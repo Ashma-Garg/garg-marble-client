@@ -13,7 +13,7 @@ export function Brands(category){
     var setWash=[];
     var array=[];
 
-    axios.get(`https://garg-marble-server.herokuapp.com/${category}/`)
+    axios.get(`http://localhost:2409/${category}/`)
     .then(res=>{
         setWash=res.data.map((r)=>{
             return(

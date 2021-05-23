@@ -2,7 +2,7 @@ import React from 'react';
 import DynamicCarousel from '../CommonComponents/DynamicCarousel'
 export function ImageLoader(props){
 
-    let image="https://garg-marble-server.herokuapp.com/" + props.category + "/" + props.image
+    let image="http://localhost:2409/" + props.category + "/" + props.image
 
     return(
         <div>

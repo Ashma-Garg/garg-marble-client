@@ -24,7 +24,7 @@ class Washbasin extends Component {
     }
      //to get all products of Washbasin
     componentDidMount() {
-        axios.get(`https://garg-marble-server.herokuapp.com/washbasin/all`)
+        axios.get(`http://localhost:2409/washbasin/all`)
             .then(res => {
                 this.setState({
                     washbasin: res.data.map((wb, i) => {
