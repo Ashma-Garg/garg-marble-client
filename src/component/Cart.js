@@ -27,12 +27,12 @@ class Cart extends Component {
         //Cart component will only be visible if customer is logged in
         if (customerId) {
             //service to list all products in Cart
-            axios.get(`/customer/cart/${customerId}`)
+            axios.get(`https://garg-marble-server.herokuapp.com/customer/cart/${customerId}`)
                 .then(res => {
                     //this variable is so that we can use this cart array's value later in ProductDisplay category field 
                     let cart = res.data
                     //this service is to find data for every prouct listed in cart
-                    axios.all(res.data.map((cartData) => axios.get(`/${cartData.category}/cartInfo/${cartData.productId}`)))
+                    axios.all(res.data.map((cartData) => axios.get(`https://garg-marble-server.herokuapp.com/${cartData.category}/cartInfo/${cartData.productId}`)))
                         .then(axios.spread((...productsInfo) => {
                             this.setState({
                                 //productsInfo is an array of all cart's product's items and that data is an array itself
@@ -86,7 +86,7 @@ class Cart extends Component {
             let quantity = l[i].value
             let productId = l[i].id
             total = total + (parseInt(price[i].innerHTML))
-            axios.post(`/customer/cart/updateQuantity`, { customerId, productId, quantity })
+            axios.post(`https://garg-marble-server.herokuapp.com/customer/cart/updateQuantity`, { customerId, productId, quantity })
                 .then(res => {
 
                 })

@@ -49,9 +49,9 @@ class AddModal extends Component {
         formData.append('quantity',quantityArray)
         formData.append("imageLength",[imageLength])
         console.log(...formData)
-        Axios.post(`/${this.props.category}/add`,formData)
+        Axios.post(`https://garg-marble-server.herokuapp.com/${this.props.category}/add`,formData)
         .then(res=>{
-            // window.location.href=`/${this.props.category}`
+            // window.location.href=`https://garg-marble-server.herokuapp.com/${this.props.category}`
             console.log(res.data)
         })
     }

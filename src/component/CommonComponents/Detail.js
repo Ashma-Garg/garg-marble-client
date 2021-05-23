@@ -37,7 +37,7 @@ class Detail extends Component {
         this.AddToCart = this.AddToCart.bind(this)
     }
     async componentWillMount() {
-        await axios.get(`/customer/info/${localStorage.getItem("Ctoken")}`)
+        await axios.get(`https://garg-marble-server.herokuapp.com/customer/info/${localStorage.getItem("Ctoken")}`)
             .then(CustomerCart => {
                 if (CustomerCart.data.Bag && CustomerCart.data.Bag.length) {
                     for (let i = 0; i < CustomerCart.data.Bag.length; i++) {
@@ -63,7 +63,7 @@ class Detail extends Component {
                     })
                 }
             })
-        axios.get(`/${this.state.category}/info/${this.state.productId}`)
+        axios.get(`https://garg-marble-server.herokuapp.com/${this.state.category}/info/${this.state.productId}`)
             .then(res => {
                 this.setState({
                     details: res.data[0].map((p, i) => {
@@ -164,11 +164,11 @@ class Detail extends Component {
             color = "rgb(211, 211, 211)"
         }
         if (customerId) {
-            axios.post(`/customer/wishlist`, { customerId, productId, color, category })
+            axios.post(`https://garg-marble-server.herokuapp.com/customer/wishlist`, { customerId, productId, color, category })
                 .then(res => {
                     return;
                 })
-            axios.post(`/${this.state.category}/addCustomer`, { productId, customerId, color })
+            axios.post(`https://garg-marble-server.herokuapp.com/${this.state.category}/addCustomer`, { productId, customerId, color })
                 .then(res => {
                     if (res.data.message) {
                         this.setState({
@@ -210,7 +210,7 @@ class Detail extends Component {
         let category = this.state.category
         let cart = this.state.cart
         if (customerId) {
-            axios.post(`/customer/add/cart`, { customerId, productId, category, cart })
+            axios.post(`https://garg-marble-server.herokuapp.com/customer/add/cart`, { customerId, productId, category, cart })
                 .then(res => {
                     if (!(res.data.error || res.err)) {
                         window.location.reload()

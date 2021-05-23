@@ -21,7 +21,7 @@ class CartDisplay extends Component {
 
     //to open Detail component
     productDetail(id){
-        window.open(`/${this.props.category}/detail/${id}`)
+        window.open(`https://garg-marble-server.herokuapp.com/${this.props.category}/detail/${id}`)
     }
 
     //add or subtract 1 from quantity when the plus or minus button clicked
@@ -51,7 +51,7 @@ class CartDisplay extends Component {
         let productId=this.props.product._id
         let category=this.props.category
         let cart="Remove from Cart"
-        axios.post(`/customer/add/cart`,{customerId,productId,category,cart})
+        axios.post(`https://garg-marble-server.herokuapp.com/customer/add/cart`,{customerId,productId,category,cart})
         .then(res=>{
             if(!(res.data.error || res.err)){
                 window.location.reload()

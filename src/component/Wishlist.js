@@ -50,12 +50,12 @@ class Wishlist extends Component{
         //wishlist component will only be visible if customer is logged in
         if(customerId){
         //service to list all products in wishlist
-        axios.get(`/customer/wishlist/${customerId}`)
+        axios.get(`https://garg-marble-server.herokuapp.com/customer/wishlist/${customerId}`)
         .then(res=>{
             //this variable is so that we can use this wishlist array's value later in ProductDisplay category field 
             let wishlist=res.data
             //this service is to find data for every prouct listed in wishlist
-            axios.all(res.data.map((wishlistData)=>axios.get(`/${wishlistData.category}/cartInfo/${wishlistData.productId}`)))
+            axios.all(res.data.map((wishlistData)=>axios.get(`https://garg-marble-server.herokuapp.com/${wishlistData.category}/cartInfo/${wishlistData.productId}`)))
             .then(axios.spread((...productsInfo)=>{
                 this.setState({
                     //productsInfo is an array of all wishlist's product's items and that data is an array itself
