@@ -21,7 +21,7 @@ class Toilet extends Component{
     }
     //to get all products of Toilets
     componentDidMount(){
-        axios.get(`/toilet/all`)
+        axios.get(`https://garg-marble-server.herokuapp.com/toilet/all`)
         .then(res => {
             this.setState({
                 toilet: res.data.map((wb, i) => {
