@@ -15,7 +15,7 @@ class Login extends Component {
         this.submit = this.submit.bind(this)
     }
     submit(values) {
-            axios.post('http://localhost:2409/owner/login', values)
+            axios.post('https://garg-marble-server.herokuapp.com/owner/login', values)
                 .then(res => {
                     if (res.data.data) {
                         localStorage.setItem("Otoken",res.data.data._id)

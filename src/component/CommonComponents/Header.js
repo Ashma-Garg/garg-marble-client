@@ -42,7 +42,7 @@ class Header extends Component {
         const customerId = localStorage.getItem("Ctoken") ? localStorage.getItem("Ctoken") : null
         const ownerId = localStorage.getItem("Otoken") ? localStorage.getItem("Otoken") : null
         if (customerId) {
-            axios.get(`http://localhost:2409/customer/info/${customerId}`)
+            axios.get(`https://garg-marble-server.herokuapp.com/customer/info/${customerId}`)
                 .then(res => {
                     if (res.data && res.data.FirstName) {
                         this.setState({

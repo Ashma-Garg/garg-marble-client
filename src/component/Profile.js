@@ -18,7 +18,7 @@ class Profile extends Component{
         this.removeeEditable=this.removeeEditable.bind(this)
     }
     componentWillMount(){
-        axios.get(`http://localhost:2409/customer/info/${this.state.id}`)
+        axios.get(`https://garg-marble-server.herokuapp.com/customer/info/${this.state.id}`)
                 .then(res => {
                     if (res.data && res.data.FirstName) {
                         this.setState({
@@ -53,7 +53,7 @@ class Profile extends Component{
             editelements[i].contentEditable=false;
             i++;
         }
-        axios.post(`http://localhost:2409/customer/updateInfo/${this.state.id}`,{array})
+        axios.post(`https://garg-marble-server.herokuapp.com/customer/updateInfo/${this.state.id}`,{array})
         .then(res=>{
             this.setState({
                 userName:res.data.FirstName + " " + res.data.LastName,

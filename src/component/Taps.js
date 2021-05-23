@@ -20,7 +20,7 @@ class Taps extends Component{
     }
     //to get all products of taps
     componentDidMount(){
-        axios.get(`http://localhost:2409/taps/all`)
+        axios.get(`https://garg-marble-server.herokuapp.com/taps/all`)
         .then(res => {
             this.setState({
                 taps: res.data.map((wb, i) => {
