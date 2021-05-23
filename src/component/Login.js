@@ -55,7 +55,7 @@ class Login extends Component {
                 city: values.city,
                 country: values.country
             }
-            axios.post('/customer/add', custmer)
+            axios.post('https://garg-marble-server.herokuapp.com/customer/add', custmer)
                 .then(res => {
                     if (res.data.err) {
                         this.setState({
@@ -70,7 +70,7 @@ class Login extends Component {
                 })
         }
         else {
-            axios.post('/customer/login', values)
+            axios.post('https://garg-marble-server.herokuapp.com/customer/login', values)
                 .then(res => {
                     if (res.data.data) {
                         localStorage.setItem("Ctoken",res.data.data._id)
