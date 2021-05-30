@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import { Row, Col, Button } from 'reactstrap'
 
+import {url} from '../shared/constant'
+
 import SideBar from './CommonComponents/SideBar'
 import SideNavbar from './CommonComponents/SideNavbar';
 import Login from './Login'
