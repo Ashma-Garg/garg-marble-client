@@ -1,18 +1,20 @@
 import React from 'react'
 import { Component } from 'react';
 import { Row, Col, Button } from 'reactstrap'
-import { Control, LocalForm } from 'react-redux-form';
 import axios from 'axios'
+
+import {url} from '../../shared/constant'
 
 import SideNavbar from './SideNavbar'
 import SideBar from './SideBar'
 import { ImageLoader } from '../FunctionalComponent/ImageLoader';
 import { ColorLoader } from '../FunctionalComponent/ColorLoader';
-import '../../css/Detail.css'
 import ViewModal from '../Modals/ViewModal'
 import Login from '../Login';
 import { Tab, Tabs } from 'react-bootstrap';
+import SearchBar from './SearchBar';
 
+import '../../css/Detail.css'
 class Detail extends Component {
     constructor(props) {
         super(props)
@@ -20,7 +22,6 @@ class Detail extends Component {
             productId: this.props.match.params.id,
             details: null,
             category: this.props.match.params.category,
-            active: false,
             isModalOpen: false,
             product: null,
             cartClass: "col-8 btn btn-outline-warning btn-lg m-5",
@@ -31,13 +32,12 @@ class Detail extends Component {
             cart: "Add to Cart"
         }
 
-        this.toggleSideNav = this.toggleSideNav.bind(this);
         this.AddToWIshlist = this.AddToWIshlist.bind(this)
         this.toggleModal = this.toggleModal.bind(this)
         this.AddToCart = this.AddToCart.bind(this)
     }
     async componentWillMount() {
-        await axios.get(`https://garg-marble-server.herokuapp.com/customer/info/${localStorage.getItem("Ctoken")}`)
+        await axios.get(`${url}/customer/info/${localStorage.getItem("Ctoken")}`)
             .then(CustomerCart => {
                 if (CustomerCart.data.Bag && CustomerCart.data.Bag.length) {
                     for (let i = 0; i < CustomerCart.data.Bag.length; i++) {
@@ -63,12 +63,12 @@ class Detail extends Component {
                     })
                 }
             })
-        axios.get(`https://garg-marble-server.herokuapp.com/${this.state.category}/info/${this.state.productId}`)
+        axios.get(`${url}/${this.state.category}/info/${this.state.productId}`)
             .then(res => {
                 this.setState({
                     details: res.data[0].map((p, i) => {
                         return (
-                            <Row key={i} className="shadow-lg bg-white rounded rowSize col-11 m-auto">
+                            <Row key={i} className="shadow-lg bg-white rounded rowSize col-11 ml-auto mr-lg-4 marginTopDetail">
                                 <Col className="col-12 col-xl-7 manageHeight" onClick={p.Image.length ? () => this.toggleViewModal(p) : null}>
                                     <ImageLoader className="col-12" image={p.Image} length={p.Image.length} category={this.state.category} />
                                 </Col>
@@ -101,7 +101,7 @@ class Detail extends Component {
                                         })
                                     }
                                     <Button onClick={this.AddToWIshlist} id={p._id + "button"} className={this.state.class}><i id={p._id + "button"} className="fa fa-heart custom-fa-heart" aria-hidden="true"></i>{this.state.wishlist}</Button>
-                                    <Tabs className="mt-3" defaultActiveKey="description" id="uncontrolled-tab-example">
+                                    <Tabs className="mt-3 navLinkManageStyling" defaultActiveKey="description" id="uncontrolled-tab-example">
                                         <Tab eventKey="description" title="Description">
                                             {p.Description}
                                         </Tab>
@@ -115,35 +115,6 @@ class Detail extends Component {
                     })
                 })
             })
-    }
-    toggleSideNav() {
-        if (this.state.active) {
-            let elem = document.getElementsByClassName("menu")
-            elem[0].classList.remove("active");
-
-            let e = document.getElementsByClassName("searchBar")
-            e[0].classList.remove("col-9", "col-xl-8", "offset-3", "offset-xl-3")
-            e[0].classList.add("col-10", "m-auto")
-
-            let el = document.getElementsByClassName("rowSize")
-            el[0].classList.add("col-11", "col-xl-11", "m-auto")
-            el[0].classList.remove("col-8", "col-xl-10", "ml-auto", "mr-xl-1")
-        }
-        else {
-            let elem = document.getElementsByClassName("menu")
-            elem[0].classList.add("active");
-
-            let e = document.getElementsByClassName("searchBar")
-            e[0].classList.remove("col-10", "m-auto")
-            e[0].classList.add("col-9", "col-xl-8", "offset-3", "offset-xl-3")
-
-            let el = document.getElementsByClassName("rowSize")
-            el[0].classList.add("col-8", "col-xl-10", "ml-auto", "mr-5", "mr-xl-1")
-            el[0].classList.remove("col-11", "col-xl-11", "m-auto")
-        }
-        this.setState({
-            active: !this.state.active
-        })
     }
     toggleViewModal(p) {
         this.setState({
@@ -164,11 +135,11 @@ class Detail extends Component {
             color = "rgb(211, 211, 211)"
         }
         if (customerId) {
-            axios.post(`https://garg-marble-server.herokuapp.com/customer/wishlist`, { customerId, productId, color, category })
+            axios.post(`${url}/customer/wishlist`, { customerId, productId, color, category })
                 .then(res => {
                     return;
                 })
-            axios.post(`https://garg-marble-server.herokuapp.com/${this.state.category}/addCustomer`, { productId, customerId, color })
+            axios.post(`${url}/${this.state.category}/addCustomer`, { productId, customerId, color })
                 .then(res => {
                     if (res.data.message) {
                         this.setState({
@@ -210,7 +181,7 @@ class Detail extends Component {
         let category = this.state.category
         let cart = this.state.cart
         if (customerId) {
-            axios.post(`https://garg-marble-server.herokuapp.com/customer/add/cart`, { customerId, productId, category, cart })
+            axios.post(`${url}/customer/add/cart`, { customerId, productId, category, cart })
                 .then(res => {
                     if (!(res.data.error || res.err)) {
                         window.location.reload()
@@ -230,18 +201,8 @@ class Detail extends Component {
         return (
             <div style={{ overflowX: 'hidden' }}>
 
-                <SideNavbar showsearch="no" />
-                <div className="shadow-lg custom-color rounded" style={{ marginBottom: "20px" }}>
-
-                    <LocalForm className="searchBar pt-4 pb-4 col-10 m-auto">
-                        <Row className="form-group">
-                            <Button onClick={this.toggleSideNav} className="toggle-button ml-2" title="Toggle Side Navbar"><i class="fa fa-bars p-0" aria-hidden="true"></i></Button>
-                            <Col>
-                                <Control.text model=".search" className="form-control" placeholder="Search" />
-                            </Col>
-                        </Row>
-                    </LocalForm>
-                </div>
+                <SideNavbar/>
+                <SearchBar/>
                 {this.state.notRefreshed ?
                     <div className="alert alert-danger alert-dismissible fade show" role="alert">
                         <p>{this.state.notRefreshed}</p>

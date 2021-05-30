@@ -2,11 +2,14 @@ import React,{Component} from 'react';
 import {Button, Row, Col} from 'reactstrap';
 import axios from 'axios'
 
+import {url} from '../shared/constant'
+
 import SideBar from './CommonComponents/SideBar'
 import ProductDisplay from './CommonComponents/ProductsDisplay';
 import SideNavbar from './CommonComponents/SideNavbar';
 import Login from './Login';
 import '../css/Washbasin.css'
+import SearchBar from './CommonComponents/SearchBar';
 
 class Toilet extends Component{
     constructor(props){
@@ -15,13 +18,14 @@ class Toilet extends Component{
             toilet:[],
             isModalOpen:false,
             id:null,
-            notrefresh:null
+            notrefresh:null,
+            active:false
         }
         
     }
     //to get all products of Toilets
     componentDidMount(){
-        axios.get(`https://garg-marble-server.herokuapp.com/toilet/all`)
+        axios.get(`${url}/toilet/all`)
         .then(res => {
             this.setState({
                 toilet: res.data.map((wb, i) => {
@@ -65,7 +69,8 @@ class Toilet extends Component{
         return(
             <div style={{ overflowX: 'hidden' }}>
                 <SideNavbar />
-                <Row className="col-10 offset-2">
+                <SearchBar className="col-12"/>
+                <Row className="col-12 marginTop">
                     <Col className="col-8 m-auto">
                     {this.state.notrefresh ?
                         <div className="alert alert-danger alert-dismissible fade show" role="alert">
@@ -80,7 +85,7 @@ class Toilet extends Component{
                 <Row style={{position:"fixed"}} className="col-10 offset-2 animateRow">
                         <i className="fa fa-heart fa-5x animateId" style={{marginLeft:this.state.xCor-300,marginTop:this.state.yCor-200,color:"red"}}></i>
                 </Row>
-                <Row className="col-9 col-xl-10 ml-auto">
+                <Row className="col-11 col-xl-12 p-0" style={{marginLeft:"65px"}} >
                     {this.state.toilet}
                 </Row>
                 {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={()=>this.toggleModal()}/>}

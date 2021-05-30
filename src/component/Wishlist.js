@@ -2,10 +2,13 @@ import React, {Component} from 'react'
 import axios from 'axios'
 import {Row,Col,Button} from 'reactstrap'
 
+import {url} from '../shared/constant'
+
 import SideNavbar from './CommonComponents/SideNavbar'
 import SideBar from './CommonComponents/SideBar'
 import ProductDisplay from "./CommonComponents/ProductsDisplay"
 import Login from './Login'
+import SearchBar from './CommonComponents/SearchBar'
 
 class Wishlist extends Component{
     constructor(props){
@@ -15,6 +18,7 @@ class Wishlist extends Component{
             isModalOpen:false,
             notrefresh: null,
             xCor:0,
+            active:false,
             yCor:0
         }
     }
@@ -50,12 +54,12 @@ class Wishlist extends Component{
         //wishlist component will only be visible if customer is logged in
         if(customerId){
         //service to list all products in wishlist
-        axios.get(`https://garg-marble-server.herokuapp.com/customer/wishlist/${customerId}`)
+        axios.get(`${url}/customer/wishlist/${customerId}`)
         .then(res=>{
             //this variable is so that we can use this wishlist array's value later in ProductDisplay category field 
             let wishlist=res.data
             //this service is to find data for every prouct listed in wishlist
-            axios.all(res.data.map((wishlistData)=>axios.get(`https://garg-marble-server.herokuapp.com/${wishlistData.category}/cartInfo/${wishlistData.productId}`)))
+            axios.all(res.data.map((wishlistData)=>axios.get(`${url}/${wishlistData.category}/cartInfo/${wishlistData.productId}`)))
             .then(axios.spread((...productsInfo)=>{
                 this.setState({
                     //productsInfo is an array of all wishlist's product's items and that data is an array itself
@@ -85,7 +89,8 @@ class Wishlist extends Component{
         return(
             <div style={{ overflowX: 'hidden'}}>
                 <SideNavbar />
-                <Row className="col-10 offset-2">
+                <SearchBar className="col-12"/>
+                <Row className="col-12 marginTop">
                     <Col className="col-8 m-auto">
                     {this.state.notrefresh ?
                         <div className="alert alert-danger alert-dismissible fade show" role="alert">
@@ -100,7 +105,7 @@ class Wishlist extends Component{
                 <Row style={{position:"fixed"}} className="col-10 offset-2 animateRow">
                         <i className="fa fa-heart fa-5x animateId" style={{marginLeft:this.state.xCor-300,marginTop:this.state.yCor-200,color:"red"}}></i>
                 </Row>
-                <Row className="col-9 col-xl-10 ml-auto">
+                <Row className="col-11 col-xl-12 p-0" style={{marginLeft:"65px"}} >
                     {this.state.data}
                 </Row>
                 <SideBar category='wishlist' />

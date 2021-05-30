@@ -22,7 +22,7 @@ export function ColorLoader(props) {
     var colors = props.color
     
     colors.map((c, i) => {
-        array.push(<Col className="m-auto col-2"><p>{c}</p><div id={i} onClick={()=>addColorSelection(props.category,props.colorProductId[i])} style={{ display: "inline", margin: "0px" }} className="rounded-circle custom-circle" style={{ backgroundColor: c }}>{props.currentProductId===props.colorProductId[i]?<i class='fa fa-check' aria-hidden='true'></i>:null}</div></Col>)
+        array.push(<Col className="m-auto col-1 col-sm-2"><p>{c}</p><div id={i} onClick={()=>addColorSelection(props.category,props.colorProductId[i])} style={{ display: "inline", margin: "0px" }} className="rounded-circle custom-circle" style={{ backgroundColor: c }}>{props.currentProductId===props.colorProductId[i]?<i class='fa fa-check' aria-hidden='true'></i>:null}</div></Col>)
     })
     return array;
 

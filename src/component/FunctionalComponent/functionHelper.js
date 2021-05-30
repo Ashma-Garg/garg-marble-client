@@ -1,6 +1,8 @@
 import axios from 'axios'
 import { DropdownItem} from 'reactstrap';
 
+import {url} from '../../shared/constant'
+
 //To Switch to brandName location and get products sorted according to Washbasin brandName
 function relocate(category,BrandName){
     var array=[];
@@ -13,7 +15,7 @@ export function Brands(category){
     var setWash=[];
     var array=[];
 
-    axios.get(`https://garg-marble-server.herokuapp.com/${category}/`)
+    axios.get(`${url}/${category}/`)
     .then(res=>{
         setWash=res.data.map((r)=>{
             return(

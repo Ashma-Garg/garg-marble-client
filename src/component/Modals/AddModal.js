@@ -3,6 +3,8 @@ import { Button, Col, Label, Modal, ModalBody, ModalHeader, Row } from 'reactstr
 import { LocalForm, Control, Errors } from 'react-redux-form'
 import Axios from 'axios';
 
+import {url} from '../../shared/constant'
+
 var required = (val) => val && val.length;
 var dataType = (val) => !(val) || /\d+$/i.test(val);
 class AddModal extends Component {
@@ -48,10 +50,9 @@ class AddModal extends Component {
         formData.append('price',array)
         formData.append('quantity',quantityArray)
         formData.append("imageLength",[imageLength])
-        console.log(...formData)
-        Axios.post(`https://garg-marble-server.herokuapp.com/${this.props.category}/add`,formData)
+        Axios.post(`${url}/${this.props.category}/add`,formData)
         .then(res=>{
-            // window.location.href=`https://garg-marble-server.herokuapp.com/${this.props.category}`
+            // window.location.href=`${url}/${this.props.category}`
             console.log(res.data)
         })
     }

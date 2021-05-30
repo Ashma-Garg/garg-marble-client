@@ -1,0 +1,23 @@
+.image{
+    height:50vw;
+    width:73vw;
+    max-width: 150px;
+    max-height:150px;
+
+    /* max-height:fit-content; */
+}
+.removePadding{
+    padding:0;
+}
+.imageSize{
+    margin-bottom:20px;
+    padding-bottom: 20px;
+    border:3px grey solid;
+}
+.setMargin{
+    margin-bottom:7px;
+    margin-left:65px;
+    /* margin-top:15px; */
+    border-bottom: 1px grey solid;
+    padding: 15px;
+}

@@ -4,6 +4,8 @@ import { Tabs, Tab } from 'react-bootstrap'
 import { Control, LocalForm, Errors } from 'react-redux-form'
 import { Button, Label, Col, Row} from 'reactstrap'
 
+import {url} from '../shared/constant'
+
 const required = (val) => val && val.length
 
 class Login extends Component {
@@ -15,7 +17,7 @@ class Login extends Component {
         this.submit = this.submit.bind(this)
     }
     submit(values) {
-            axios.post('https://garg-marble-server.herokuapp.com/owner/login', values)
+            axios.post(`${url}/owner/login`, values)
                 .then(res => {
                     if (res.data.data) {
                         localStorage.setItem("Otoken",res.data.data._id)

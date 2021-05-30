@@ -6,6 +6,8 @@ import { Control, LocalForm, Errors } from 'react-redux-form'
 import { Button, Label, Col, Row, ModalBody, Modal} from 'reactstrap'
 // import { Map, InfoWindow, Marker, GoogleApiWrapper } from 'google-maps-react';
 
+import {url} from '../shared/constant'
+
 const required = (val) => val && val.length
 // const maxlength = (len) => (val) => !val || val.length <= len
 // const minlength = (len)=>(val) => val ? val.length >= len : 1;
@@ -55,7 +57,7 @@ class Login extends Component {
                 city: values.city,
                 country: values.country
             }
-            axios.post('https://garg-marble-server.herokuapp.com/customer/add', custmer)
+            axios.post(`${url}/customer/add`, custmer)
                 .then(res => {
                     if (res.data.err) {
                         this.setState({
@@ -70,7 +72,7 @@ class Login extends Component {
                 })
         }
         else {
-            axios.post('https://garg-marble-server.herokuapp.com/customer/login', values)
+            axios.post(`${url}/customer/login`, values)
                 .then(res => {
                     if (res.data.data) {
                         localStorage.setItem("Ctoken",res.data.data._id)

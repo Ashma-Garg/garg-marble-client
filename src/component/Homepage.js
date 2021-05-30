@@ -11,7 +11,7 @@ class Homepage extends Component {
       <div>
         <Header />
         <Row>
-          <Col className="col-12">
+          <Col className="col-12 p-0">
             <div className="mdbcolsd col-12">
               <LocalForm>
                 <Control.text className="form-control col-8 offset-2" placeholder="Search" model=".search" style={{ background: "rgba(0, 0, 0, 0.4)", color: "white" }} />

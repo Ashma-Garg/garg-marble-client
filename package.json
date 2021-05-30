@@ -29,7 +29,7 @@
     "socket.io-client": "^4.1.1",
     "web-vitals": "^0.2.4"
   },
-  "proxy": "http://localhost:4200",
+  "proxy": "https://garg-marble-server.herokuapp.com",
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",

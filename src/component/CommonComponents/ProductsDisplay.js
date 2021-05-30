@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
 import { Card, CardBody, CardTitle, Col, Row } from 'reactstrap'
+import axios from 'axios'
+
+import {url} from '../../shared/constant'
 
 import { ImageLoader } from '../FunctionalComponent/ImageLoader'
-
 import '../../css/ProductDisplay.css'
-import axios from 'axios'
+
 class ProductDisplay extends Component {
     constructor(props) {
         super(props)
@@ -41,11 +43,11 @@ class ProductDisplay extends Component {
         let category=this.props.category
         if(customerId){        
             var color=window.getComputedStyle(document.getElementById(e.target.id), null).getPropertyValue('color')
-            axios.post(`https://garg-marble-server.herokuapp.com/customer/wishlist`,{customerId,productId,color,category})
+            axios.post(`${url}/customer/wishlist`,{customerId,productId,color,category})
             .then(res=>{
                     return;
             })
-            axios.post(`https://garg-marble-server.herokuapp.com/${this.props.category}/addCustomer`,{productId,customerId,color})
+            axios.post(`${url}/${this.props.category}/addCustomer`,{productId,customerId,color})
             .then(res=>{
                 if (res.data.message) {
                     this.setState({
@@ -79,32 +81,36 @@ class ProductDisplay extends Component {
     }
     render() {
         return (
-            <Col className="col-12 col-lg-6 col-xl-3 mt-5" key={this.props.key}>
+            <Col className="col-12 col-sm-5 col-lg-4 col-xl-2 m-1 m-lg-auto m-xl-2" key={this.props.key}>
 
-                {/* Will only be visible if window size is xs, sm or md */}
-                <Row onClick={()=>this.productDetail(this.props.product._id)} className="visibilityAccordance col-10 d-lg-none ">
+                {/* Will only be visible if window size is xs, sm */}
+                <Row onClick={()=>this.productDetail(this.props.product._id)} className="visibilityAccordance col-10 d-sm-none mt-5 pb-3">
+                    <Row className="col-12 p-0 m-auto flex-nowrap">
                     <Col className="removePadding">
                         <ImageLoader category={this.props.category} image={this.props.product.Image[0]?this.props.product.Image[0]:null} length={1}/>
                     </Col>
+                    </Row>
+                    <Row className="col-12 p-0 m-auto">
                     <Col>
                         <div variant="subtitle1">
                             <div className="sub">
-                                {this.props.product.Name} <span style={{fontWeight:"100",fontSize:"12px"}}> {this.props.product.Size.Width}x{this.props.product.Size.Height} {this.props.product.Colors}</span>
+                                {this.props.product.Name} <span style={{fontWeight:"100",fontSize:"12px"}}> {this.props.product.Size.Width}x{this.props.product.Size.Height}</span>
                             </div>
-                        </div>
-                        <div style={{fontWeight:"100",fontSize:"12px"}}>
-                                {this.props.product.Colors}
                         </div>
                         <div variant="bod2">
                             <div className="body2">
                                 {this.props.product.Brand}
                             </div>
                         </div>
+                        <div style={{fontWeight:"100",fontSize:"12px"}}>
+                                {this.props.product.Colors}
+                        </div>
                         </Col>
+                    </Row>
                 </Row>
 
-                {/* Will only be visible if window size is lg or xl */}
-                <Card className="shadow-lg mb-2 bg-white rounded visibilityAccess d-none d-lg-block">
+                {/* Will only be visible if window size is md or lg or xl */}
+                <Card className="shadow-lg mb-2 bg-white rounded visibilityAccess d-none d-sm-block">
                     <CardTitle id={this.props.product._id} onClick={()=>this.productDetail(this.props.product._id)} style={{padding:"0px"}}>
                         <ImageLoader category={this.props.category} image={this.props.product.Image[0]?this.props.product.Image[0]:null} length={1} />
                     </CardTitle>

@@ -4,10 +4,14 @@ import {
     UncontrolledDropdown, DropdownMenu, DropdownToggle, Navbar, NavItem, Collapse, NavLink, NavbarBrand, NavbarToggler, Nav
     // ,Button,Row,Col
 } from 'reactstrap'
+import axios from 'axios'
+
+import {url} from '../../shared/constant'
+
 import '../../css/header.css'
 import { Brands } from '../FunctionalComponent/functionHelper'
 import Login from '../Login'
-import axios from 'axios'
+
 class Header extends Component {
     constructor(props) {
         super(props)
@@ -42,7 +46,7 @@ class Header extends Component {
         const customerId = localStorage.getItem("Ctoken") ? localStorage.getItem("Ctoken") : null
         const ownerId = localStorage.getItem("Otoken") ? localStorage.getItem("Otoken") : null
         if (customerId) {
-            axios.get(`https://garg-marble-server.herokuapp.com/customer/info/${customerId}`)
+            axios.get(`${url}/customer/info/${customerId}`)
                 .then(res => {
                     if (res.data && res.data.FirstName) {
                         this.setState({
@@ -110,7 +114,6 @@ class Header extends Component {
     render() {
         return (
             <div className="setPosition">
-
                 <Navbar className="navbar-dark fixed-top navbar-custom col-12" expand="xl">
                     <NavbarToggler onClick={this.toggleNavbar} />
                     <NavbarBrand className="mr-auto shopName">Garg Marble & Sanitary House</NavbarBrand>

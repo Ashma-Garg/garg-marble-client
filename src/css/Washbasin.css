@@ -12,6 +12,9 @@
 .animateRowZIndex{
     animation: animateRowZIndex 2s ease;
 }
+.marginTop{
+    margin:5rem;
+}
 @keyframes animateRowZIndex {
     from{
         z-index:3

@@ -1,0 +1,10 @@
+.styling{
+    position:fixed;
+    z-index:2;
+}
+.rowSize{
+    transition:0.7s ease;
+}
+.searchBar{
+    transition: 1s ease;
+}
