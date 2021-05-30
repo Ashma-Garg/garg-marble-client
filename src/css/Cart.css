@@ -1,4 +1,4 @@
-.image{
+.setMargin .image{
     height:50vw;
     width:73vw;
     max-width: 150px;
@@ -16,7 +16,7 @@
 }
 .setMargin{
     margin-bottom:7px;
-    margin-left:65px;
+    margin-left:65.setpx;
     /* margin-top:15px; */
     border-bottom: 1px grey solid;
     padding: 15px;
