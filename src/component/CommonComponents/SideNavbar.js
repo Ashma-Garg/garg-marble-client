@@ -168,7 +168,7 @@ class SideNavbar extends React.Component {
                                     </li>
                                 </td>
                                 <td>
-                                    <li className="nav-item"><a href="/toilet"><img src="https://img.icons8.com/fluent/48/000000/piping.png" /></a></li>
+                                    <li className="nav-item"><a href="/toilet"><img src="https://img.icons8.com/fluent/48/000000/toilet-bowl.png" /></a></li>
                                 </td>
                             </tr>
                             <tr>
@@ -181,7 +181,7 @@ class SideNavbar extends React.Component {
                                     </li>
                                 </td>
                                 <td>
-                                    <li className="nav-item"><a href="/toilet"><img src="https://img.icons8.com/fluent/48/000000/toilet-bowl.png" /></a></li>
+                                    <li className="nav-item"><a href="/taps"><img src="https://img.icons8.com/fluent/48/000000/piping.png" /></a></li>
                                 </td>
                             </tr>
                             <tr>
