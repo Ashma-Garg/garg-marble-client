@@ -28,12 +28,12 @@ class Cart extends Component {
         //Cart component will only be visible if customer is logged in
         if (customerId) {
             //service to list all products in Cart
-            axios.get(`/customer/cart/${customerId}`)
+            axios.get(`${url}/customer/cart/${customerId}`)
                 .then(res => {
                     //this variable is so that we can use this cart array's value later in ProductDisplay category field 
                     let cart = res.data
                     //this service is to find data for every prouct listed in cart
-                    axios.all(res.data.map((cartData) => axios.get(`/${cartData.category}/cartInfo/${cartData.productId}`)))
+                    axios.all(res.data.map((cartData) => axios.get(`${url}/${cartData.category}/cartInfo/${cartData.productId}`)))
                         .then(axios.spread((...productsInfo) => {
                             this.setState({
                                 //productsInfo is an array of all cart's product's items and that data is an array itself
@@ -88,7 +88,7 @@ class Cart extends Component {
             let quantity = l[i].value
             let productId = l[i].id
             total = total + (parseInt(price[i].innerHTML))
-            axios.post(`/customer/cart/updateQuantity`, { customerId, productId, quantity })
+            axios.post(`${url}/customer/cart/updateQuantity`, { customerId, productId, quantity })
                 .then(res => {
 
                 })
@@ -136,7 +136,7 @@ class Cart extends Component {
                             }
                         </Col>
                     </Row>
-                    <Row>
+                    <Row style={{marginTop:"5rem"}}>
                         <Col className="offset-3 col-5 ml-auto">
                             <p className="ml-auto" style={{ color: "darkkhaki", fontWeight: "700" }}>Total: {this.state.total}</p>
                         </Col>
@@ -145,7 +145,7 @@ class Cart extends Component {
 
                     {/* This button navigates to other location which will trigger autoUpdatebag automatically. */}
                     {/* <a href="/toilet">*/}
-                    <Button onClick={()=>this.callSocketService()}>Confirm Order</Button>
+                    <Button className="mt-3" onClick={()=>this.callSocketService()}>Confirm Order</Button>
                     {/*</a> */}
                     
                     <SideBar category='cart' />
@@ -157,7 +157,8 @@ class Cart extends Component {
             return (
                 <div style={{ overflowX: 'hidden' }}>
                     <SideNavbar />
-                    <Row className="col-10 offset-2">
+                    <SearchBar className="col-12"/>
+                    <Row className="col-10 offset-2" style={{marginTop:"5rem"}}>
                         <Col className="col-8 m-auto">
                             <div className="alert alert-danger alert-dismissible fade show" role="alert">
                                 <p>Please Login to view your Cart List</p>
