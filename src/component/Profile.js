@@ -103,7 +103,7 @@ class Profile extends Component {
                             </Col>
                         </Row>
                         <Row className="col-12"><p style={{ color: "wheat" }} className="m-auto">Warning: Address cannot be edited</p></Row>
-                    </Row> : <Row style={{ height: "90vh" }}><h2 className="ml-auto mr-auto" style={{ color: "grey",marginTop:"7rem"}}>You have logged out. To continue please sign in.</h2></Row>}
+                    </Row> : <Row className="col-10" style={{ height: "90vh",marginLeft:"65px" }}><h2 style={{ color: "grey",marginTop:"7rem"}} className="m-auto">You have logged out. To continue please sign in.</h2></Row>}
                 <SideBar />
             </div>
         );

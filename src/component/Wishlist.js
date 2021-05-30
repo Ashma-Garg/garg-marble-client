@@ -117,8 +117,9 @@ class Wishlist extends Component{
             return(
                 <div style={{ overflowX: 'hidden'}}>
                     <SideNavbar />
-                    <Row className="col-10 offset-2">
-                    <Col className="col-8 m-auto">
+                    <SearchBar className="col-12"/>
+                    <Row className="col-10" style={{marginTop:"10rem",marginLeft:"65px"}}>
+                    <Col className="col-12">
                         <div className="alert alert-danger alert-dismissible fade show" role="alert">
                             <p>Please Login to view your Wishlist</p>
                             

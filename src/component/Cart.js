@@ -128,7 +128,7 @@ class Cart extends Component {
                 <div style={{ overflowX: 'hidden'}}>
                     <SideNavbar />
                     <SearchBar className="col-12"/>
-                    <Row className="col-10 offset-2" style={{marginTop:"5rem" }}>
+                    <Row className="col-10" style={{marginTop:"5rem" }}>
                         <Col className="col-8 m-auto">
                             {this.state.notrefresh ?
                                 <div className="alert alert-danger alert-dismissible fade show" role="alert">
@@ -162,8 +162,8 @@ class Cart extends Component {
                 <div style={{ overflowX: 'hidden' }}>
                     <SideNavbar />
                     <SearchBar className="col-12"/>
-                    <Row className="col-10 offset-2" style={{marginTop:"5rem"}}>
-                        <Col className="col-8 m-auto">
+                    <Row  className="col-10" style={{marginTop:"10rem",marginLeft:"65px"}}>
+                    <Col className="col-12">
                             <div className="alert alert-danger alert-dismissible fade show" role="alert">
                                 <p>Please Login to view your Cart List</p>
                             </div>

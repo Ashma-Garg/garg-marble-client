@@ -39,6 +39,7 @@ class Detail extends Component {
     async componentWillMount() {
         await axios.get(`${url}/customer/info/${localStorage.getItem("Ctoken")}`)
             .then(CustomerCart => {
+                console.log(CustomerCart)
                 if (CustomerCart.data.Bag && CustomerCart.data.Bag.length) {
                     for (let i = 0; i < CustomerCart.data.Bag.length; i++) {
                         if (CustomerCart.data.Bag[i].category === this.state.category && CustomerCart.data.Bag[i].productId === this.state.productId) {
