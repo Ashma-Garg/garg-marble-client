@@ -46,12 +46,14 @@ class Cart extends Component {
                                             this.setState({
                                                 total: this.state.total + (cart[i].Quantity * info.Price)
                                             })
+                                            if(info._id){
                                             return (<CartDisplay
                                                 totalPrice={(price, price1) => this.totalPrice(price, price1)}
                                                 toggleModal={() => this.toggleModal()}
                                                 notRefreshed={(res) => this.notRefreshed(res)}
                                                 quantity={cart[i].Quantity}
                                                 category={cart[i].category} product={info} />)
+                                            }
                                         }))
                                 })
                             })
