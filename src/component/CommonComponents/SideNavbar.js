@@ -196,7 +196,7 @@ class SideNavbar extends React.Component {
                                     </li>
                                 </td>
                                 <td>
-                                    <li className="nav-item"><a><i style={{color:"white"}} className="fa fa-sign-out fa-3x ml-auto"></i></a></li>
+                                    <li className="nav-item"><a onClick={this.logoutCustomer}><i title="LogOut" style={{color:"white"}} className="fa fa-sign-out fa-3x ml-auto"></i></a></li>
                                 </td>
                             </tr>
                             <tr id="customerLogIn">
@@ -207,7 +207,7 @@ class SideNavbar extends React.Component {
                                 </td>
                                 <td>
                                     <li className="nav-item">
-                                        <a><i style={{color:"white"}} className="fa ml-auto fa-sign-in fa-3x"></i></a>
+                                        <a onClick={this.toggleModal}><i title="LogIn" style={{color:"white"}} className="fa ml-auto fa-sign-in fa-3x"></i></a>
                                     </li>
                                 </td>
                             </tr>
