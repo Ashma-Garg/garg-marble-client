@@ -82,7 +82,6 @@ class Cart extends Component {
 
     //handles- when changes are made but not saved, it will save the changes automatically
     autoBagUpdate() {
-        alert("Please save your chnages first")
         let l = document.querySelectorAll("input[name=quantity]")
         let i = 0
         let customerId = localStorage.getItem("Ctoken")

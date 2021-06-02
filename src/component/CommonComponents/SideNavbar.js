@@ -125,18 +125,12 @@ class SideNavbar extends React.Component {
                     <ul className="nav flex-column overflow-scroll flex-nowrap sideNavUL">
                         <Table>
                             <tr>
-                                <td></td>
-                                <td><Button onClick={this.toggleSideNav} className="toggle-button ml-2 mt-1" title="Toggle Side Navbar"><i class="fa fa-bars p-0" aria-hidden="true"></i></Button></td>
-                            </tr>
-                            <tr>
                                 <td>
                                     <li id="business">
                                         <a href="/">Garg Marble & Sanitary House</a>
                                     </li>
                                 </td>
-                                {/* <td>
-                                    <li className="nav-item"><a href="/"><i className="fa fa-home fa-3x"></i></a></li>
-                                </td> */}
+                                <td><Button onClick={this.toggleSideNav} className="toggle-button ml-2 mt-1" title="Toggle Side Navbar"><i class="fa fa-bars p-0" aria-hidden="true"></i></Button></td>
                             </tr>
                             <tr>
                                 <td>
