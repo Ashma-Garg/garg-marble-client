@@ -1,39 +1,29 @@
 import React, { Component } from 'react';
 import { Button, Row, Col } from 'reactstrap';
-import axios from 'axios'
-import { withRouter } from 'react-router-dom'
 
-import { url } from '../shared/constant'
-
-import SideNavbar from './CommonComponents/SideNavbar';
-import SideBar from './CommonComponents/SideBar'
-import ProductDisplay from './CommonComponents/ProductsDisplay';
-import Login from './Login';
-import '../css/Washbasin.css'
-import SearchBar from './CommonComponents/SearchBar';
-
-class Washbasin extends Component {
+import SideNavbar from './SideNavbar';
+import SideBar from './SideBar'
+import ProductDisplay from './ProductsDisplay';
+import Login from '../Login';
+import SearchBar from './SearchBar';
+import '../../css/Washbasin.css'
+class SearchResults extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            washbasin: [],
+            search_Results: null,
             isModalOpen: false,
             notrefresh: null,
             xCor: 0,
             yCor: 0
         }
-
     }
-    //to get all products of Washbasin
-    componentDidMount() {
-        axios.get(`${url}/washbasin/all`)
-            .then(res => {
-                this.setState({
-                    washbasin: res.data.map((wb, i) => {
-                        return (
-                            <ProductDisplay addanimation={(val, x, y) => this.addanimation(val, x, y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={'washbasin'} product={wb} key={i} />
-                        );
-                    })
+    componentDidMount(){
+            this.setState({
+                search_Results: this.props.history.location.state.sa.map((wb, i) => {
+                    return (
+                        <ProductDisplay addanimation={(val, x, y) => this.addanimation(val, x, y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={'washbasin'} product={wb} key={i} />
+                    );
                 })
             })
     }
@@ -84,8 +74,9 @@ class Washbasin extends Component {
                 <Row style={{ position: "fixed" }} className="col-10 offset-2 animateRow">
                     <i className="fa fa-heart fa-5x animateId" style={{ marginLeft: this.state.xCor - 300, marginTop: this.state.yCor - 200, color: "red" }}></i>
                 </Row>
+                <p id="searchArray"></p>
                 <Row className="col-11 col-xl-12 p-0" style={{ marginLeft: "65px" }} >
-                    {this.state.washbasin}
+                {this.state.search_Results===null?this.state.search_Results:<div className="m-auto pl-2 pr-5"><p className="m-auto" style={{fontWeight:"700",fontSize:"2rem",color:'grey'}}>No Records found</p><div><p style={{color:'grey'}}>Either you didn't type anything or there are no matching results to your search.</p></div></div>}
                 </Row>
 
                 {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={() => this.toggleModal()} />}
@@ -94,5 +85,7 @@ class Washbasin extends Component {
         );
     }
 }
-export default withRouter(Washbasin);
+export default SearchResults;
 
+
+            

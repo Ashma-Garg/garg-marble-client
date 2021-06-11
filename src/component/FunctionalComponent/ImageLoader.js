@@ -5,7 +5,6 @@ import {url} from '../../shared/constant'
 import DynamicCarousel from '../CommonComponents/DynamicCarousel'
 
 export function ImageLoader(props){
-    console.log(props.image)
 
     let image=url + "/" + props.category + "/images" + "/" + props.image
 

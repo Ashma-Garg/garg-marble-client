@@ -10,16 +10,17 @@ import SideNavbar from './CommonComponents/SideNavbar';
 import Login from './Login';
 import '../css/Washbasin.css'
 import SearchBar from './CommonComponents/SearchBar';
+import SearchResults from './CommonComponents/SearchResults'
 
 class Taps extends Component{
     constructor(props){
         super(props)
         this.state={
-            taps:[],
-            isModalOpen:false,
-            id:null,
-            notrefresh:null,
-            active:false
+            taps: [],
+            isModalOpen: false,
+            notrefresh: null,
+            xCor: 0,
+            yCor: 0
         }    
     }
     //to get all products of taps
@@ -63,7 +64,7 @@ class Taps extends Component{
             
         }
     }
-    
+
 
     render(){
         return(
@@ -85,7 +86,7 @@ class Taps extends Component{
                 <Row style={{position:"fixed"}} className="col-10 offset-2 animateRow">
                         <i className="fa fa-heart fa-5x animateId" style={{marginLeft:this.state.xCor-300,marginTop:this.state.yCor-200,color:"red"}}></i>
                 </Row>
-                <Row className="col-11 col-xl-12 p-0" style={{marginLeft:"65px"}} >
+               <Row className="col-11 col-xl-12 p-0" style={{ marginLeft: "65px" }} >
                     {this.state.taps}
                 </Row>
                 {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={()=>this.toggleModal()}/>}

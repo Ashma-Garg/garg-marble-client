@@ -12,6 +12,7 @@ import Profile from './Profile'
 import Cart from './Cart'
 import LoginOwner from './LoginOwner'
 import '../css/main.css'
+import SearchResults from './CommonComponents/SearchResults';
 
 class MainComp extends Component{
     render(){
@@ -25,8 +26,9 @@ class MainComp extends Component{
             <Route exact path='/wishlist' component={Wishlist}></Route>
             <Route exact path="/cart" component={Cart}></Route>
             <Route exact path="/login/owner" component={LoginOwner}></Route>
+            <Route exact path='/searchresults' component={SearchResults}></Route>
             <Route exact path='/:category/detail/:id' component={Detail}></Route>
-            <Route exatc path='/:category/:brand' component={WashbasinBrand}></Route>
+            <Route exact path='/:category/:brand' component={WashbasinBrand}></Route>
             <Redirect to='/'></Redirect>
           </Switch>
         );

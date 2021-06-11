@@ -1,11 +1,56 @@
 import React, { Component } from 'react'
 import { Carousel, Row, Col } from 'react-bootstrap'
+import axios from 'axios'
+import { Control, LocalForm } from 'react-redux-form'
+
+import { url } from '../shared/constant'
+
 import Header from './CommonComponents/Header'
 import image from '../images/Main.jpg'
 import '../css/homepage.css'
-import { Control, LocalForm } from 'react-redux-form'
+import { Link } from 'react-router-dom'
+import { Button } from 'reactstrap'
 
 class Homepage extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      typingTimer: 1,
+      doneTypingInterval: 1000,
+      searchArray: []
+    }
+    this.searchProduct = this.searchProduct.bind(this)
+    this.doneTyping = this.doneTyping.bind(this)
+    this.searchResults=this.searchResults.bind(this)
+  }
+
+  searchProduct(e) {
+    clearTimeout(this.state.typingTimer);
+    if (e.search) {
+      this.setState({
+        typingTimer: setTimeout(this.doneTyping, this.state.doneTypingInterval)
+      })
+    }
+  }
+  doneTyping() {
+    let search = document.getElementById("globalsearch").value
+    axios.post(`${url}/masterproducts/search`, { search })
+      .then((res) => {
+        this.setState({
+          searchArray:res.data.map((matchedProducts)=>{
+            return(matchedProducts)
+          })
+        })
+      })
+      search ? document.getElementById("searchArray").style.display = "block" : document.getElementById("searchArray").style.display = "none";
+  }
+  searchResultrenderto(category,id){
+    window.location.href=`/${category}/detail/${id}`
+  } 
+  searchResults() {
+    document.getElementById("searchArray").style.display = "none";
+    document.getElementById('openSearchResults').click()
+  }
   render() {
     return (
       <div>
@@ -13,8 +58,25 @@ class Homepage extends Component {
         <Row>
           <Col className="col-12 p-0">
             <div className="mdbcolsd col-12">
-              <LocalForm>
-                <Control.text className="form-control col-8 offset-2" placeholder="Search" model=".search" style={{ background: "rgba(0, 0, 0, 0.4)", color: "white" }} />
+              <LocalForm onChange={this.searchProduct} onSubmit={this.searchResults}>
+                <Row>
+                <Control.text id="globalsearch" className="form-control col-8 offset-2" placeholder="Search" model=".search" style={{ background: "rgba(0, 0, 0, 0.4)", color: "white" }} ></Control.text>
+                <Button><Link id="openSearchResults"
+                to={{
+                  pathname: `/searchresults`,
+                  state: {
+                    sa: this.state.searchArray,
+                  },
+                }}><i className="fa fa-search"/></Link></Button>
+                </Row>
+                <ul className="form-control col-8 offset-2" id="searchArray" style={{display:"none",boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",backgroundColor:"white",listStyleType:"none",height:"fit-content"}}>
+                  {this.state.searchArray.map((ele) => {
+                    return (
+                      <li style={{marginLeft:"0",maxHeight:"50px",padding:"10px",cursor:'pointer'}} onClick={()=>{this.searchResultrenderto(ele.category,ele._id)}}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
+                    )
+                  })
+                  }
+                </ul>
               </LocalForm>
             </div>
 

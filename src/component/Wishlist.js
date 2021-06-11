@@ -18,7 +18,6 @@ class Wishlist extends Component{
             isModalOpen:false,
             notrefresh: null,
             xCor:0,
-            active:false,
             yCor:0
         }
     }
@@ -105,7 +104,7 @@ class Wishlist extends Component{
                 <Row style={{position:"fixed"}} className="col-10 offset-2 animateRow">
                         <i className="fa fa-heart fa-5x animateId" style={{marginLeft:this.state.xCor-300,marginTop:this.state.yCor-200,color:"red"}}></i>
                 </Row>
-                <Row className="col-11 col-xl-12 p-0" style={{marginLeft:"65px"}} >
+               <Row className="col-11 col-xl-12 p-0" style={{ marginLeft: "65px" }} >
                     {this.state.data}
                 </Row>
                 <SideBar category='wishlist' />
