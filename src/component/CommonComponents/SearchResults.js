@@ -19,6 +19,7 @@ class SearchResults extends Component {
         }
     }
     componentDidMount(){
+        if(this.props.history.location.state.sa.length){
             this.setState({
                 search_Results: this.props.history.location.state.sa.map((wb, i) => {
                     return (
@@ -26,6 +27,8 @@ class SearchResults extends Component {
                     );
                 })
             })
+        }
+
     }
     notRefreshed(res) {
         this.setState({
@@ -76,7 +79,7 @@ class SearchResults extends Component {
                 </Row>
                 <p id="searchArray"></p>
                 <Row className="col-11 col-xl-12 p-0" style={{ marginLeft: "65px" }} >
-                {this.state.search_Results===null?this.state.search_Results:<div className="m-auto pl-2 pr-5"><p className="m-auto" style={{fontWeight:"700",fontSize:"2rem",color:'grey'}}>No Records found</p><div><p style={{color:'grey'}}>Either you didn't type anything or there are no matching results to your search.</p></div></div>}
+                {this.state.search_Results!==null?this.state.search_Results:<div className="m-auto pl-2 pr-5"><p className="m-auto" style={{fontWeight:"700",fontSize:"2rem",color:'grey'}}>No Records found</p><div><p style={{color:'grey'}}>Either you didn't type anything or there are no matching results to your search.</p></div></div>}
                 </Row>
 
                 {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={() => this.toggleModal()} />}
