@@ -92,12 +92,12 @@ class CartDisplay extends Component {
                             Quantity:
 
                             <div style={{ display: "inline-block"}}>
-                                <div class="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
-                                    <div class="input-group" style={{ width: '80px' }}>
-                                        <div class="input-group-append">
+                                <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
+                                    <div className="input-group" style={{ width: '80px' }}>
+                                        <div className="input-group-append">
                                             <i onClick={() => this.alterQuantity(1)} className="fa fa-plus" style={{ paddingRight: "3px", borderRight: "1px solid black" }}></i>
                                         </div>
-                                        <input style={{ height: "22px"}} onChange={this.onchange} name="quantity" id={this.props.product._id} type="number" aria-describedby="button-addon1" class="form-control border-0 bg-light" />
+                                        <input style={{ height: "22px"}} onChange={this.onchange} name="quantity" id={this.props.product._id} type="number" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                         <div>
                                             <i onClick={() => this.alterQuantity(-1)} className="fa fa-minus" style={{ paddingLeft: "3px", borderLeft: "1px solid black" }}></i>
                                         </div>

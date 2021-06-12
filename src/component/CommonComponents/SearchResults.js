@@ -11,7 +11,8 @@ class SearchResults extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            search_Results: null,
+            search_Results_list: this.props.history.location.state.sa,
+            search_reasult:null,
             isModalOpen: false,
             notrefresh: null,
             xCor: 0,
@@ -19,16 +20,30 @@ class SearchResults extends Component {
         }
     }
     componentDidMount(){
+        // console.log(this.props.history.location.state.sa)
         if(this.props.history.location.state.sa.length){
             this.setState({
-                search_Results: this.props.history.location.state.sa.map((wb, i) => {
+                search_Results: this.state.search_Results_list.map((wb, i) => {
                     return (
-                        <ProductDisplay addanimation={(val, x, y) => this.addanimation(val, x, y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={'washbasin'} product={wb} key={i} />
+                        <ProductDisplay key={i} addanimation={(val, x, y) => this.addanimation(val, x, y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={'washbasin'} product={wb} key={i} />
                     );
                 })
             })
         }
-
+    }
+    componentDidUpdate(){
+        if(this.props.history.location.state.sa!=this.state.search_Results_list){
+        this.setState({
+            search_Results_list:this.props.history.location.state.sa
+        })
+        this.setState({
+            search_Results:this.props.history.location.state.sa.map((wb, i) => {
+                return (
+                    <ProductDisplay key={i} addanimation={(val, x, y) => this.addanimation(val, x, y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={'washbasin'} product={wb} key={i} />
+                );
+            })
+        })
+    }
     }
     notRefreshed(res) {
         this.setState({

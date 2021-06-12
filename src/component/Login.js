@@ -117,7 +117,7 @@ class Login extends Component {
                                                 />
                                             </Col>
                                         </Row>
-                                        <Row class="form-group">
+                                        <Row className="form-group">
                                             <Col className="col-12 col-md-3">
                                                 <Label htmlFor="password"><span style={{ color: "red" }}>*</span>Password: </Label>
                                             </Col>
@@ -173,7 +173,7 @@ class Login extends Component {
                                                 />
                                             </Col>
                                         </Row>
-                                        <Row class="form-group">
+                                        <Row className="form-group">
                                             <Col className="col-3 col-sm-3">
                                                 <Label htmlFor="Uppassword"><span style={{ color: "red" }}>*</span>Password: </Label>
                                             </Col>
@@ -230,7 +230,7 @@ class Login extends Component {
                                                 <Control.text type="number" className="form-control" model=".pincode" id="pincode" name="pincode" required></Control.text>
                                             </Col>
                                         </Row>
-                                        <Row class="form-group">
+                                        <Row className="form-group">
                                             <Col className="col-12 col-sm-3">
                                                 <Label htmlFor="state"><span style={{ color: "red" }}>*</span>State: </Label>
                                             </Col>

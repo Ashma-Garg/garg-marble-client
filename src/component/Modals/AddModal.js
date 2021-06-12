@@ -91,7 +91,7 @@ class AddModal extends Component {
                     <h3>Add New {this.props.category.toUpperCase()}</h3>
                 </ModalHeader>
                 <ModalBody>
-                    <div class="container">
+                    <div className="container">
                         <LocalForm encType="multipart/form-data" onSubmit={this.handleSubmit} className="col-md-10" validateOn="submit">
                             <Row className="form-group" md={12}>
                                 <Label htmlFor="name" md={3}><span style={{ color: "red" }}>* </span> Name: </Label>
@@ -137,7 +137,7 @@ class AddModal extends Component {
                             <Row className="form-group">
                                 <Label md={3} htmlFor="colors"><span style={{ color: "red" }}>* </span> Colors: </Label>
                                 <Col>
-                                    <Control.select onBlur={this.addCost} multiple class="form-control" id="colors" model=".colors" name="colors" validators={{ required }}>
+                                    <Control.select onBlur={this.addCost} multiple className="form-control" id="colors" model=".colors" name="colors" validators={{ required }}>
                                         <option>White</option>
                                         <option>Black</option>
                                         <option>Grey</option>
@@ -163,15 +163,15 @@ class AddModal extends Component {
                                         </Col>
                                         <Col id="priceGrey" className="d-none col-6 col-lg-3">
                                             <Label htmlFor="priceGrey"><span style={{ color: "red" }}>* </span> Grey: </Label>
-                                            <Control.text type="number" class="form-control" model=".priceGrey" name="priceGrey" />
+                                            <Control.text type="number" className="form-control" model=".priceGrey" name="priceGrey" />
                                         </Col>
                                         <Col id="priceBlue" className="d-none col-6 col-lg-3">
                                             <Label htmlFor="priceBlue"><span style={{ color: "red" }}>* </span> Blue: </Label>
-                                            <Control.text type="number" class="form-control" model=".priceBlue" name="priceBlue" />
+                                            <Control.text type="number" className="form-control" model=".priceBlue" name="priceBlue" />
                                         </Col>
                                         <Col id="priceIvory" className="d-none col-6 col-lg-3">
                                             <Label htmlFor="priceIvory"><span style={{ color: "red" }}>* </span> Ivory: </Label>
-                                            <Control.text type="number" class="form-control" model=".priceIvory" name="priceIvory" />
+                                            <Control.text type="number" className="form-control" model=".priceIvory" name="priceIvory" />
                                         </Col>
                                     </Row>
                                 </Col>
@@ -198,15 +198,15 @@ class AddModal extends Component {
                                         </Col>
                                         <Col id="imageGrey" className="d-none col-12">
                                             <Label htmlFor="imageGrey">Grey: </Label>
-                                            <Control.file multiple class="form-control" model=".imageGrey" name="imageGrey" />
+                                            <Control.file multiple className="form-control" model=".imageGrey" name="imageGrey" />
                                         </Col>
                                         <Col id="imageBlue" className="d-none col-12">
                                             <Label htmlFor="imageBlue">Blue: </Label>
-                                            <Control.file multiple class="form-control" model=".imageBlue" name="imageBlue" />
+                                            <Control.file multiple className="form-control" model=".imageBlue" name="imageBlue" />
                                         </Col>
                                         <Col id="imageIvory" className="d-none col-12">
                                             <Label htmlFor="imageIvory">Ivory: </Label>
-                                            <Control.file multiple class="form-control" model=".imageIvory" name="imageIvory" />
+                                            <Control.file multiple className="form-control" model=".imageIvory" name="imageIvory" />
                                         </Col>     
                                 </Col>
                             </Row>
@@ -223,15 +223,15 @@ class AddModal extends Component {
                                         </Col>
                                         <Col id="quantityGrey" className="d-none col-12">
                                             <Label htmlFor="quantityGrey">Grey: </Label>
-                                            <Control.text type="number" class="form-control" model=".quantityGrey" name="quantityGrey" />
+                                            <Control.text type="number" className="form-control" model=".quantityGrey" name="quantityGrey" />
                                         </Col>
                                         <Col id="quantityBlue" className="d-none col-12">
                                             <Label htmlFor="quantityBlue">Blue: </Label>
-                                            <Control.text type="number" class="form-control" model=".quantityBlue" name="quantityBlue" />
+                                            <Control.text type="number" className="form-control" model=".quantityBlue" name="quantityBlue" />
                                         </Col>
                                         <Col id="quantityIvory" className="d-none col-12">
                                             <Label htmlFor="quantityIvory">Ivory: </Label>
-                                            <Control.text type="number" class="form-control" model=".quantityIvory" name="quantityIvory" />
+                                            <Control.text type="number" className="form-control" model=".quantityIvory" name="quantityIvory" />
                                         </Col>     
                                 </Col>
                             </Row>

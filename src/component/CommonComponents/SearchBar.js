@@ -30,7 +30,10 @@ class SearchBar extends Component {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
   handleClickOutside(event) {
+    setTimeout(()=>{
       document.getElementById("searchArray").style.display = "none"
+    },500)
+      
   }
   searchProduct(e) {
     clearTimeout(this.state.typingTimer);
@@ -68,15 +71,15 @@ class SearchBar extends Component {
   render() {
     return (
       <div className="col-12 shadow-lg custom-color rounded styling">
-        <LocalForm id="searchLocalForm" className="searchBar pt-4 pb-4 col-10 m-auto" onSubmit={this.searchResults} onChange={this.searchProduct}>
+        <LocalForm id="searchLocalForm" className="searchBar pt-4 pb-4 col-8 col-sm-10 m-auto" onSubmit={this.searchResults} onChange={this.searchProduct}>
           <Row className="form-group">
-            <Col className="col-11 p-0">
+            <Col className="col-9 col-sm-10 col-md-11 p-0">
               <Control.text id="globalsearch" className="form-control" placeholder="Search" model=".search" />
               <Col className="p-0 m-0">
                 <ul className="form-control" id="searchArray" style={{ position: 'absolute', display: "none", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", backgroundColor: "white", listStyleType: "none", height: "fit-content" }}>
-                  {this.state.searchArray.map((ele) => {
+                  {this.state.searchArray.slice(0,5).map((ele,i) => {
                     return (
-                      <li style={{ marginLeft: "0", maxHeight: "50px", padding: "10px", cursor: 'pointer' }} onClick={() => { this.renderto(ele.category, ele._id) }}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
+                      <li key={i} style={{ marginLeft: "0", maxHeight: "50px", padding: "10px", cursor: 'pointer' }} onClick={() => { this.renderto(ele.category, ele._id) }}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
                     )
                   })
                   }

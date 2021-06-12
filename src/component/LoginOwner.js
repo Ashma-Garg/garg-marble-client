@@ -57,7 +57,7 @@ class Login extends Component {
                                             />
                                         </Col>
                                     </Row>
-                                        <Row class="form-group">
+                                        <Row className="form-group">
                                             <Col className="col-3">
                                                 <Label htmlFor="password"><span style={{color:"red"}}>*</span>Password: </Label>
                                             </Col>

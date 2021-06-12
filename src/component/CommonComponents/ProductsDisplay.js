@@ -81,7 +81,7 @@ class ProductDisplay extends Component {
     }
     render() {
         return (
-            <Col className="col-12 col-sm-5 col-lg-4 col-xl-2 m-1 m-lg-auto m-xl-2" key={this.props.key}>
+            <Col className="col-10 col-sm-5 col-lg-4 col-xl-2 m-1 m-auto m-sm-0 m-lg-auto m-xl-2" key={this.props.key}>
 
                 {/* Will only be visible if window size is xs, sm */}
                 <Row onClick={()=>this.productDetail(this.props.product._id)} className="visibilityAccordance col-10 d-sm-none mt-5 pb-3">
@@ -118,23 +118,25 @@ class ProductDisplay extends Component {
                         <Row>
                             <Col>
                                 <div className="subCard">
-                                    {this.props.product.Name}   <span style={{fontWeight:"100",fontFamily:"monospace"}}>{this.props.product.Size.Width}x{this.props.product.Size.Height}</span>
+                                    {this.props.product.Name}
                                 </div>
-                                <div style={{fontWeight:"100",fontFamily:"monospace",textAlign:"left"}}>
-                                    {this.props.product.Colors}
+                                <div style={{fontWeight:"100",fontSize:'0.7rem',fontFamily:"monospace",textAlign:"left"}}>
+                                    {this.props.product.Colors}   <span style={{fontFamily:"monospace"}}>{this.props.product.Size.Width}x{this.props.product.Size.Height}</span>
                                 </div>
+                                
                             </Col>
                         </Row>
                         <Row>
                             <Col>
                                 <div className="body2Card">
-                                    {this.props.product.Brand}
+                                    <p style={{margin:"0"}}>{this.props.product.Brand}</p>
+                                    <p style={{margin:"0"}}>Rs. {this.props.product.Price}</p>
                                 </div>
                             </Col>
                         </Row>
                         <Row>
                             <Col className="col-12">
-                                <div className="col-2 ml-auto"><i id={this.props.product._id+"button"} onClick={this.AddToWishlist} class="fa fa-heart fa-2x" style={{color:this.state.color}} aria-hidden="true"></i></div>
+                                <div className="col-2 ml-auto"><i id={this.props.product._id+"button"} onClick={this.AddToWishlist} className="fa fa-heart fa-2x" style={{color:this.state.color}} aria-hidden="true"></i></div>
                             </Col>
                         </Row>
                     </CardBody>

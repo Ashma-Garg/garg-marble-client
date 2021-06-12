@@ -70,7 +70,7 @@ class Homepage extends Component {
                 }}><i className="fa fa-search"/></Link></Button>
                 </Row>
                 <ul className="form-control col-8 offset-2" id="searchArray" style={{display:"none",boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",backgroundColor:"white",listStyleType:"none",height:"fit-content"}}>
-                  {this.state.searchArray.map((ele) => {
+                  {this.state.searchArray.slice(0,5).map((ele) => {
                     return (
                       <li style={{marginLeft:"0",maxHeight:"50px",padding:"10px",cursor:'pointer'}} onClick={()=>{this.searchResultrenderto(ele.category,ele._id)}}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
                     )
@@ -80,9 +80,9 @@ class Homepage extends Component {
               </LocalForm>
             </div>
 
-            <div className="sliderr col-6 offset-3">
-              <p>We provide you the best</p>
-              <p>EXPERIENCE</p>
+            <div className="sliderr">
+              <p className="col-6 m-auto">We provide you the best</p>
+              <p className="col-8 m-auto">EXPERIENCE</p>
             </div>
             <div className="overlay"></div>
             <img src={image} alt="Main" style={{ width: "100%", height: "100vh" }} />

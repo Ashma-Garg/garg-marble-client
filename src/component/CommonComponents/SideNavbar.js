@@ -130,7 +130,7 @@ class SideNavbar extends React.Component {
                                         <a href="/">Garg Marble & Sanitary House</a>
                                     </li>
                                 </td>
-                                <td><Button onClick={this.toggleSideNav} className="toggle-button ml-2 mt-1" title="Toggle Side Navbar"><i class="fa fa-bars p-0" aria-hidden="true"></i></Button></td>
+                                <td><Button onClick={this.toggleSideNav} className="toggle-button ml-2 mt-1" title="Toggle Side Navbar"><i className="fa fa-bars p-0" aria-hidden="true"></i></Button></td>
                             </tr>
                             <tr>
                                 <td>
@@ -145,7 +145,7 @@ class SideNavbar extends React.Component {
                             <tr>
                                 <td>
                                     <li className="nav-item">
-                                        <a className="nav-link d-inline-block" href="/washbasin">Washbasin</a><span class="dropdown-toggle" style={{ color: "white" }} onClick={() => this.toggleSubMenu("dropdown1")}></span>
+                                        <a className="nav-link d-inline-block" href="/washbasin">Washbasin</a><span className="dropdown-toggle" style={{ color: "white" }} onClick={() => this.toggleSubMenu("dropdown1")}></span>
                                     </li>
                                 </td>
                                 <td>
@@ -158,7 +158,7 @@ class SideNavbar extends React.Component {
                             <tr>
                                 <td>
                                     <li className="nav-item">
-                                        <a className="nav-link d-inline-block" href="/toilet">Toilet </a> <span class="dropdown-toggle" style={{ color: "white" }} onClick={() => this.toggleSubMenu("dropdown2")}></span>
+                                        <a className="nav-link d-inline-block" href="/toilet">Toilet </a> <span className="dropdown-toggle" style={{ color: "white" }} onClick={() => this.toggleSubMenu("dropdown2")}></span>
                                     </li>
                                 </td>
                                 <td>
@@ -171,7 +171,7 @@ class SideNavbar extends React.Component {
                             <tr>
                                 <td>
                                     <li className="nav-item">
-                                        <a className="nav-link d-inline-block" href="/taps">Taps </a> <span class="dropdown-toggle" style={{ color: "white" }} onClick={() => this.toggleSubMenu("dropdown3")}></span>
+                                        <a className="nav-link d-inline-block" href="/taps">Taps </a> <span className="dropdown-toggle" style={{ color: "white" }} onClick={() => this.toggleSubMenu("dropdown3")}></span>
                                     </li>
                                 </td>
                                 <td>
