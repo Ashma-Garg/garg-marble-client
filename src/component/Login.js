@@ -64,10 +64,13 @@ class Login extends Component {
                             err: res.data.err
                         })
                     }
-                    else if (res.data.data) {
+                    else if (res.data.data && res.data.data.confirmed) {
+
                         localStorage.setItem("Ctoken", res.data.data._id)
                         this.toggleModal()
                         window.location.reload(true)
+                    }
+                    else if(res.data.data && !res.data.data.confirmed){
                     }
                 })
         }
@@ -171,6 +174,7 @@ class Login extends Component {
                                                         validEmail: "Invalid Email"
                                                     }}
                                                 />
+                                                <p style={{ color: "orange" }}>A confirmation mail will be send to your entered email id for verification.</p>
                                             </Col>
                                         </Row>
                                         <Row className="form-group">
@@ -207,7 +211,7 @@ class Login extends Component {
                                                 <Control.text type="number" className="form-control" model=".number" id="number" name="number" required></Control.text>
                                             </Col>
                                         </Row>
-                                        <p style={{ color: "orange" }}>Remember you can not change your address later and this address will be considered as your shipping address.</p>
+                                        <p style={{ color: "orange",width:"fit-content" }} className="m-auto">Remember you can not change your address later and this address will be considered as your shipping address.</p>
                                         <Row className="form-group">
                                             <Col className="col-12 col-sm-3">
                                                 <Label htmlFor="address"><span style={{ color: "red" }}>*</span>Street Address: </Label>

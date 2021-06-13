@@ -1,6 +1,5 @@
 import React from 'react'
 import { Button, Row, Table } from 'reactstrap'
-import { Control, LocalForm } from 'react-redux-form';
 
 import { Brands } from '../FunctionalComponent/functionHelper'
 import Login from '../Login'
@@ -36,24 +35,7 @@ class SideNavbar extends React.Component {
             document.getElementById("customerLogOut").style.display = "none"
             document.getElementById("customerLogIn").style.display = "block"
         }
-        //     // this if else condition is for sidenavbar display
-        //     if (this.props.showsearch) {
-        //         this.setState({
-        //             showSearch: "none"
-        //         })
-
-        //     }
-        //     else {
-        //         this.setState({
-        //             showSearch: "block"
-        //         })
-        //         var ele = document.getElementsByClassName("menu")
-        //         ele[0].classList.add("active")
-        //     }
     }
-    // componentDidUpdate(){
-
-    // }
     async toggleSubMenu(id) {
         await this.setState({
             [id]: !this.state[`${id}`]
@@ -97,10 +79,6 @@ class SideNavbar extends React.Component {
             let e = document.getElementsByClassName("searchBar")
             e[0].classList.remove("col-9", "col-xl-8", "offset-3", "offset-xl-3")
             e[0].classList.add("col-10", "m-auto")
-
-            // let el = document.getElementsByClassName("rowSize")
-            // el[0].classList.add("col-11", "col-xl-11", "m-auto")
-            // el[0].classList.remove("col-8", "col-xl-10", "ml-auto", "mr-xl-1")
         }
         else {
             let elem = document.getElementsByClassName("menu")
@@ -109,10 +87,6 @@ class SideNavbar extends React.Component {
             let e = document.getElementsByClassName("searchBar")
             e[0].classList.remove("col-10", "m-auto")
             e[0].classList.add("col-9", "col-xl-8", "offset-3", "offset-xl-3")
-
-            // let el = document.getElementsByClassName("rowSize")
-            // el[0].classList.add("col-8", "col-xl-10", "ml-auto", "mr-5", "mr-xl-1")
-            // el[0].classList.remove("col-11", "col-xl-11", "m-auto")
         }
         this.setState({
             active: !this.state.active

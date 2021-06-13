@@ -11,6 +11,7 @@ import Wishlist from './Wishlist'
 import Profile from './Profile'
 import Cart from './Cart'
 import LoginOwner from './LoginOwner'
+import Confirm from './CommonComponents/Confirm'
 import '../css/main.css'
 import SearchResults from './CommonComponents/SearchResults';
 
@@ -28,7 +29,9 @@ class MainComp extends Component{
             <Route exact path="/login/owner" component={LoginOwner}></Route>
             <Route exact path='/searchresults' component={SearchResults}></Route>
             <Route exact path='/:category/detail/:id' component={Detail}></Route>
+            <Route exact path='/confirm/:email/:id' component={Confirm}></Route>
             <Route exact path='/:category/:brand' component={WashbasinBrand}></Route>
+
             <Redirect to='/'></Redirect>
           </Switch>
         );

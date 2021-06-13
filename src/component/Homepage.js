@@ -21,7 +21,7 @@ class Homepage extends Component {
     }
     this.searchProduct = this.searchProduct.bind(this)
     this.doneTyping = this.doneTyping.bind(this)
-    this.searchResults=this.searchResults.bind(this)
+    this.searchResults = this.searchResults.bind(this)
   }
 
   searchProduct(e) {
@@ -37,16 +37,16 @@ class Homepage extends Component {
     axios.post(`${url}/masterproducts/search`, { search })
       .then((res) => {
         this.setState({
-          searchArray:res.data.map((matchedProducts)=>{
-            return(matchedProducts)
+          searchArray: res.data.map((matchedProducts) => {
+            return (matchedProducts)
           })
         })
       })
-      search ? document.getElementById("searchArray").style.display = "block" : document.getElementById("searchArray").style.display = "none";
+    search ? document.getElementById("searchArray").style.display = "block" : document.getElementById("searchArray").style.display = "none";
   }
-  searchResultrenderto(category,id){
-    window.location.href=`/${category}/detail/${id}`
-  } 
+  searchResultrenderto(category, id) {
+    window.location.href = `/${category}/detail/${id}`
+  }
   searchResults() {
     document.getElementById("searchArray").style.display = "none";
     document.getElementById('openSearchResults').click()
@@ -57,35 +57,36 @@ class Homepage extends Component {
         <Header />
         <Row>
           <Col className="col-12 p-0">
-            <div className="mdbcolsd col-12">
-              <LocalForm onChange={this.searchProduct} onSubmit={this.searchResults}>
-                <Row>
-                <Control.text id="globalsearch" className="form-control col-8 offset-2" placeholder="Search" model=".search" style={{ background: "rgba(0, 0, 0, 0.4)", color: "white" }} ></Control.text>
-                <Button><Link id="openSearchResults"
-                to={{
-                  pathname: `/searchresults`,
-                  state: {
-                    sa: this.state.searchArray,
-                  },
-                }}><i className="fa fa-search"/></Link></Button>
-                </Row>
-                <ul className="form-control col-8 offset-2" id="searchArray" style={{display:"none",boxShadow:"0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)",backgroundColor:"white",listStyleType:"none",height:"fit-content"}}>
-                  {this.state.searchArray.slice(0,5).map((ele) => {
-                    return (
-                      <li style={{marginLeft:"0",maxHeight:"50px",padding:"10px",cursor:'pointer'}} onClick={()=>{this.searchResultrenderto(ele.category,ele._id)}}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
-                    )
-                  })
-                  }
-                </ul>
-              </LocalForm>
+            <div className="col-12" style={{ position: 'absolute' }}>
+              <div className="overlay"></div>
+              <div className="mdbcolsd col-12">
+                <LocalForm onChange={this.searchProduct} onSubmit={this.searchResults}>
+                  <Row>
+                    <Control.text id="globalsearch" className="form-control col-8 offset-2" placeholder="Search" model=".search" style={{ background: "rgba(0, 0, 0, 0.4)", color: "white" }} ></Control.text>
+                    <Button><Link id="openSearchResults"
+                      to={{
+                        pathname: `/searchresults`,
+                        state: {
+                          sa: this.state.searchArray,
+                        },
+                      }}><i className="fa fa-search" /></Link></Button>
+                  </Row>
+                  <ul className="form-control col-8 offset-2" id="searchArray" style={{ display: "none", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", backgroundColor: "white", listStyleType: "none", height: "fit-content" }}>
+                    {this.state.searchArray.slice(0, 5).map((ele) => {
+                      return (
+                        <li style={{ marginLeft: "0", maxHeight: "50px", padding: "10px", cursor: 'pointer' }} onClick={() => { this.searchResultrenderto(ele.category, ele._id) }}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
+                      )
+                    })
+                    }
+                  </ul>
+                  <div className="sliderr mt-3 mb-3">
+                    <p className="col-6 m-auto">We provide you the best</p>
+                    <p className="col-8 m-auto">EXPERIENCE</p>
+                  </div>
+                </LocalForm>
+              </div>
             </div>
-
-            <div className="sliderr">
-              <p className="col-6 m-auto">We provide you the best</p>
-              <p className="col-8 m-auto">EXPERIENCE</p>
-            </div>
-            <div className="overlay"></div>
-            <img src={image} alt="Main" style={{ width: "100%", height: "100vh" }} />
+            <img src={image} alt="Main" style={{ width: "100%", height: "77vh" }} />
           </Col>
         </Row>
 
