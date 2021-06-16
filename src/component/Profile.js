@@ -14,6 +14,7 @@ class Profile extends Component {
         super(props)
         this.state = {
             id: localStorage.getItem("Ctoken"),
+            owner:localStorage.getItem("Otoken"),
             username: null,
             email: null,
             phone: Number,
@@ -23,6 +24,7 @@ class Profile extends Component {
         this.removeeEditable = this.removeeEditable.bind(this)
     }
     componentWillMount() {
+        if(this.state.id){
         axios.get(`${url}/customer/info/${this.state.id}`)
             .then(res => {
                 if (res.data && res.data.FirstName) {
@@ -37,7 +39,7 @@ class Profile extends Component {
                     console.log(res.err)
                 }
             })
-        console.log(this.state.username)
+        }
     }
     editable() {
         let editelements = document.getElementsByClassName("editable");
@@ -103,8 +105,9 @@ class Profile extends Component {
                             </Col>
                         </Row>
                         <Row className="col-12"><p style={{ color: "wheat" }} className="m-auto">Warning: Address cannot be edited</p></Row>
-                    </Row> : <Row className="col-10" style={{ height: "90vh",marginLeft:"65px" }}><h2 style={{ color: "grey",marginTop:"7rem"}} className="m-auto">You have logged out. To continue please sign in.</h2></Row>}
-                <SideBar />
+                    </Row> : this.state.owner?<Row className="col-10" style={{ height: "90vh",marginLeft:"65px" }}><h2 style={{ color: "grey",marginTop:"7rem"}} className="m-auto">Owner signed in.</h2></Row> :
+                    <Row className="col-10" style={{ height: "90vh",marginLeft:"65px" }}><h2 style={{ color: "grey",marginTop:"7rem"}} className="m-auto">You have logged out. To continue please sign in.</h2></Row>}
+                <SideBar hideAddProduct="true" />
             </div>
         );
     }

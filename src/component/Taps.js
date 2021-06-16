@@ -10,7 +10,7 @@ import SideNavbar from './CommonComponents/SideNavbar';
 import Login from './Login';
 import '../css/Washbasin.css'
 import SearchBar from './CommonComponents/SearchBar';
-import SearchResults from './CommonComponents/SearchResults'
+import DeleteModal from './Modals/DeleteModal';
 
 class Taps extends Component{
     constructor(props){
@@ -18,9 +18,11 @@ class Taps extends Component{
         this.state={
             taps: [],
             isModalOpen: false,
+            isDeleteModalOpen: false,
             notrefresh: null,
             xCor: 0,
-            yCor: 0
+            yCor: 0,
+            DeleteProduct:null
         }    
     }
     //to get all products of taps
@@ -31,7 +33,7 @@ class Taps extends Component{
                 taps: res.data.map((wb, i) => {
                     return (
                         // <ProductDisplay ViewtoggleModal={(view,id)=>this.ViewtoggleModal(view,id)} category={'taps'} product={wb} key={i}/>
-                        <ProductDisplay addanimation={(val,x,y)=>this.addanimation(val,x,y)} toggleModal={()=>this.toggleModal()} notRefreshed={(res)=>this.notRefreshed(res)} category={'taps'} product={wb} key={i}/>
+                        <ProductDisplay toggleDeleteProductModal={()=>this.toggleDeleteProductModal(wb)} addanimation={(val,x,y)=>this.addanimation(val,x,y)} toggleModal={()=>this.toggleModal()} notRefreshed={(res)=>this.notRefreshed(res)} category={'taps'} product={wb} key={i}/>
                     );
                 })
             })
@@ -45,6 +47,12 @@ class Taps extends Component{
     toggleModal(){
         this.setState({
             isModalOpen:!this.state.isModalOpen
+        })
+    }
+    toggleDeleteProductModal(val){
+        this.setState({
+            isDeleteModalOpen: !this.state.isDeleteModalOpen,
+            DeleteProduct:val
         })
     }
     addanimation(val,x,y){
@@ -90,6 +98,8 @@ class Taps extends Component{
                     {this.state.taps}
                 </Row>
                 {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={()=>this.toggleModal()}/>}
+                {/* {this.state.isEditModalOpen && <AddModal  category={'taps'} EditProduct={this.state.EditProduct} isModalOpen={this.state.isEditModalOpen} toggleAddModal={() => this.toggleEditProductModal()} />} */}
+                {this.state.isDeleteModalOpen && <DeleteModal category={'taps'} DeleteProduct={this.state.DeleteProduct} isModalOpen={this.state.isDeleteModalOpen} toggleDeleteModal={() => this.toggleDeleteProductModal()}/>}
                 <SideBar category='taps'/>
             </div>
         );

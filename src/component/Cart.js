@@ -151,7 +151,7 @@ class Cart extends Component {
                     <Button className="mt-3" onClick={()=>this.callSocketService()}>Confirm Order</Button>
                     {/*</a> */}
                     
-                    <SideBar category='cart' />
+                    <SideBar  hideAddProduct="true"/>
                 </div>
 
             )
@@ -169,7 +169,7 @@ class Cart extends Component {
                         </Col>
                     </Row>
                     {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={() => this.toggleModal()} />}
-                    <SideBar category='cart' />
+                    <SideBar  hideAddProduct="true" />
                 </div>
             );
         }

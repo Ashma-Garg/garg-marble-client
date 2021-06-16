@@ -16,9 +16,11 @@ class Wishlist extends Component{
         this.state={
             data:[],
             isModalOpen:false,
+            isDeleteModalOpen: false,
             notrefresh: null,
-            xCor:0,
-            yCor:0
+            xCor: 0,
+            yCor: 0,
+            DeleteProduct:null
         }
     }
     notRefreshed(res) {
@@ -29,6 +31,12 @@ class Wishlist extends Component{
     toggleModal() {
         this.setState({
             isModalOpen:!this.state.isModalOpen
+        })
+    }
+    toggleDeleteProductModal(val){
+        this.setState({
+            isDeleteModalOpen: !this.state.isDeleteModalOpen,
+            DeleteProduct:val
         })
     }
     addanimation(val,x,y){
@@ -65,8 +73,7 @@ class Wishlist extends Component{
                     data: productsInfo.map((productInfo,i)=>{
                         return (
                             productInfo.data.map(info=>{
-                                console.log(info)
-                            return (<ProductDisplay addanimation={(val,x,y)=>this.addanimation(val,x,y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={wishlist[i].category} product={info}/>)
+                            return (<ProductDisplay toggleDeleteProductModal={()=>this.toggleDeleteProductModal(info)} addanimation={(val,x,y)=>this.addanimation(val,x,y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={wishlist[i].category} product={info}/>)
                         })
                         )
                     })
@@ -107,7 +114,7 @@ class Wishlist extends Component{
                <Row className="col-11 col-xl-12 p-0" style={{ marginLeft: "65px" }} >
                     {this.state.data}
                 </Row>
-                <SideBar category='wishlist' />
+                <SideBar  hideAddProduct="true" />
             </div>
             
         )
@@ -126,7 +133,7 @@ class Wishlist extends Component{
                     </Col>
                     </Row>
                     {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={() => this.toggleModal()} />}
-                    <SideBar category='wishlist' />
+                    <SideBar  hideAddProduct="true" />
                 </div>
             );
         }

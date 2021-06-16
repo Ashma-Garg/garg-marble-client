@@ -16,6 +16,7 @@ class ProductDisplay extends Component {
             notRefreshed:null
         }
         this.AddToWishlist = this.AddToWishlist.bind(this)
+        this.deleteProduct=this.deleteProduct.bind(this)
     }
     componentDidMount(){
 
@@ -35,7 +36,10 @@ class ProductDisplay extends Component {
             })
         }
     }
-
+    deleteProduct(e){
+        this.props.toggleDeleteProductModal()
+        //start from toggleModal of AddModal(take reference from sidebar)
+    }
     AddToWishlist(e) {
         let productId=e.target.id;
         productId=productId.substring(0,productId.length-6)
@@ -81,7 +85,7 @@ class ProductDisplay extends Component {
     }
     render() {
         return (
-            <Col className="col-10 col-sm-5 col-lg-4 col-xl-2 m-1 m-auto m-sm-0 m-lg-auto m-xl-2" key={this.props.key}>
+            <Col className="col-10 col-sm-5 col-lg-4 col-xl-2 m-1 m-auto m-sm-0 m-lg-auto m-xl-2" id={this.props.product._id + this.props.product.Name} key={this.props.key}>
 
                 {/* Will only be visible if window size is xs, sm */}
                 <Row onClick={()=>this.productDetail(this.props.product._id)} className="visibilityAccordance col-10 d-sm-none mt-5 pb-3">
@@ -136,7 +140,12 @@ class ProductDisplay extends Component {
                         </Row>
                         <Row>
                             <Col className="col-12">
+                                {localStorage.getItem("Otoken")?
+                                <div className="col-2 ml-auto"><i id={this.props.product._id+"edit"} onClick={this.deleteProduct} className="fa fa-trash fa-2x" style={{color:'red'}}></i></div>
+                                :
                                 <div className="col-2 ml-auto"><i id={this.props.product._id+"button"} onClick={this.AddToWishlist} className="fa fa-heart fa-2x" style={{color:this.state.color}} aria-hidden="true"></i></div>
+                                }
+
                             </Col>
                         </Row>
                     </CardBody>

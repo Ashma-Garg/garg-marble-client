@@ -27,11 +27,12 @@ class SideNavbar extends React.Component {
     }
     componentDidMount() {
         let customerId = localStorage.getItem("Ctoken") ? localStorage.getItem("Ctoken") : null;
-        if (customerId) {
+        let ownerId = localStorage.getItem("Otoken") ? localStorage.getItem("Otoken") : null;
+        if (customerId||ownerId) {
             document.getElementById("customerLogOut").style.display = "block"
             document.getElementById("customerLogIn").style.display = "none"
         }
-        else {
+        else if(!(customerId&&ownerId)) {
             document.getElementById("customerLogOut").style.display = "none"
             document.getElementById("customerLogIn").style.display = "block"
         }
@@ -61,9 +62,7 @@ class SideNavbar extends React.Component {
     }
     logoutCustomer() {
         localStorage.removeItem("Ctoken")
-        this.setState({
-            userName: null
-        })
+        localStorage.removeItem("Otoken")
         window.location.reload(true)
     }
     toggleModal() {

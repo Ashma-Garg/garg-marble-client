@@ -9,6 +9,7 @@ import SideNavbar from './CommonComponents/SideNavbar';
 import SideBar from './CommonComponents/SideBar'
 import ProductDisplay from './CommonComponents/ProductsDisplay';
 import Login from './Login';
+import DeleteModal from './Modals/DeleteModal';
 import '../css/Washbasin.css'
 import SearchBar from './CommonComponents/SearchBar';
 
@@ -18,9 +19,11 @@ class Washbasin extends Component {
         this.state = {
             washbasin: [],
             isModalOpen: false,
+            isDeleteModalOpen: false,
             notrefresh: null,
             xCor: 0,
-            yCor: 0
+            yCor: 0,
+            DeleteProduct:null
         }
 
     }
@@ -31,7 +34,7 @@ class Washbasin extends Component {
                 this.setState({
                     washbasin: res.data.map((wb, i) => {
                         return (
-                            <ProductDisplay addanimation={(val, x, y) => this.addanimation(val, x, y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={'washbasin'} product={wb} key={i} />
+                            <ProductDisplay toggleDeleteProductModal={()=>this.toggleDeleteProductModal(wb)} addanimation={(val, x, y) => this.addanimation(val, x, y)} toggleModal={() => this.toggleModal()} notRefreshed={(res) => this.notRefreshed(res)} category={'washbasin'} product={wb} key={i} />
                         );
                     })
                 })
@@ -45,6 +48,12 @@ class Washbasin extends Component {
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen
+        })
+    }
+    toggleDeleteProductModal(val){
+        this.setState({
+            isDeleteModalOpen: !this.state.isDeleteModalOpen,
+            DeleteProduct:val
         })
     }
     addanimation(val, x, y) {
@@ -89,6 +98,9 @@ class Washbasin extends Component {
                 </Row>
 
                 {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={() => this.toggleModal()} />}
+                {/* {this.state.isEditModalOpen && <AddModal category={'washbasin'} EditProduct={this.state.EditProduct} isModalOpen={this.state.isEditModalOpen} toggleAddModal={() => this.toggleEditProductModal()} />} */}
+                
+                {this.state.isDeleteModalOpen && <DeleteModal category={'washbasin'} DeleteProduct={this.state.DeleteProduct} isModalOpen={this.state.isDeleteModalOpen} toggleDeleteModal={() => this.toggleDeleteProductModal()}/>}
                 <SideBar category='washbasin' />
             </div>
         );

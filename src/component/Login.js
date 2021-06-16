@@ -64,13 +64,18 @@ class Login extends Component {
                             err: res.data.err
                         })
                     }
-                    else if (res.data.data && res.data.data.confirmed) {
+                    // else if (res.data.data && res.data.data.confirmed) {
 
-                        localStorage.setItem("Ctoken", res.data.data._id)
-                        this.toggleModal()
-                        window.location.reload(true)
-                    }
+                    //     localStorage.setItem("Ctoken", res.data.data._id)
+                    //     this.toggleModal()
+                    //     window.location.reload(true)
+                    // }
                     else if(res.data.data && !res.data.data.confirmed){
+                        this.toggleModal()
+                        this.setState({
+                            err: null
+                        })
+                        alert('Check your Inbox to verify your email id.')
                     }
                 })
         }
