@@ -79,9 +79,7 @@ class SearchBar extends Component {
                 <ul className="form-control" id="searchArray" style={{ position: 'absolute', display: "none", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", backgroundColor: "white", listStyleType: "none", height: "fit-content" }}>
                   {this.state.searchArray.slice(0,5).map((ele,i) => {
                     return (
-                      <div>
-                      <li key={i} style={{ marginLeft: "0", maxHeight: "50px", padding: "10px", cursor: 'pointer' }} onClick={() => { this.renderto(ele.category, ele._id) }}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
-                      </div>
+                      <li key={i} style={{ marginLeft: "0", height: "fit-content", padding: "10px", cursor: 'pointer' }} onClick={() => { this.renderto(ele.category, ele._id) }}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
                     )
                   })
                   }

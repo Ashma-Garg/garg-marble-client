@@ -74,7 +74,7 @@ class Homepage extends Component {
                   <ul className="form-control col-8 offset-2" id="searchArray" style={{ display: "none", boxShadow: "0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)", backgroundColor: "white", listStyleType: "none", height: "fit-content" }}>
                     {this.state.searchArray.slice(0, 5).map((ele) => {
                       return (
-                        <li style={{ marginLeft: "0", maxHeight: "50px", padding: "10px", cursor: 'pointer' }} onClick={() => { this.searchResultrenderto(ele.category, ele._id) }}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
+                        <li style={{ marginLeft: "0", height:"fit-content", padding: "10px", cursor: 'pointer' }} onClick={() => { this.searchResultrenderto(ele.category, ele._id) }}>{(ele.Brand + " " + ele.Name + " " + ele.Colors).toLowerCase()}</li>
                       )
                     })
                     }
@@ -91,11 +91,11 @@ class Homepage extends Component {
         </Row>
 
         <Row style={{ paddingTop: "100px" }}>
-          <div id="first" className="col-sm-12 col-md-6 col-lg-4 d-inline-block">
+          <div className="col-sm-12 col-md-6 col-lg-4 d-inline-block">
             <Carousel>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDkwsEzbofdPAhLy8aWJCzpm1os0MBgB1Xlg&usqp=CAU"
                   alt="First slide"
@@ -107,7 +107,7 @@ class Homepage extends Component {
               </Carousel.Item>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy6GtX0HM-a5DyUCYQtawHXj-Tf41aD-EF1w&usqp=CAU"
                   alt="Third slide"
@@ -120,7 +120,7 @@ class Homepage extends Component {
               </Carousel.Item>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXxZDYcRbZMiPTZQ05Z3URKfnzyhZZO4XVYw&usqp=CAU"
                   alt="Third slide"
@@ -133,11 +133,11 @@ class Homepage extends Component {
               </Carousel.Item>
             </Carousel>
           </div>
-          <div id="second" className="col-sm-12 col-md-6 col-lg-4">
+          <div className="d-none d-sm-inline-block col-sm-6 col-lg-4">
             <Carousel>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDkwsEzbofdPAhLy8aWJCzpm1os0MBgB1Xlg&usqp=CAU"
                   alt="First slide"
@@ -149,7 +149,7 @@ class Homepage extends Component {
               </Carousel.Item>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy6GtX0HM-a5DyUCYQtawHXj-Tf41aD-EF1w&usqp=CAU"
                   alt="Third slide"
@@ -162,7 +162,7 @@ class Homepage extends Component {
               </Carousel.Item>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXxZDYcRbZMiPTZQ05Z3URKfnzyhZZO4XVYw&usqp=CAU"
                   alt="Third slide"
@@ -175,11 +175,11 @@ class Homepage extends Component {
               </Carousel.Item>
             </Carousel>
           </div>
-          <div id="third" className="col-sm-12 col-md-12 col-lg-4">
+          <div className="d-none d-lg-inline-block col-lg-4">
             <Carousel>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQDkwsEzbofdPAhLy8aWJCzpm1os0MBgB1Xlg&usqp=CAU"
                   alt="First slide"
@@ -191,7 +191,7 @@ class Homepage extends Component {
               </Carousel.Item>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQy6GtX0HM-a5DyUCYQtawHXj-Tf41aD-EF1w&usqp=CAU"
                   alt="Third slide"
@@ -204,7 +204,7 @@ class Homepage extends Component {
               </Carousel.Item>
               <Carousel.Item interval="1000">
                 <img
-                  style={{ height: "70vh" }}
+                  style={{ height: "50vh" }}
                   className="d-block w-100"
                   src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXxZDYcRbZMiPTZQ05Z3URKfnzyhZZO4XVYw&usqp=CAU"
                   alt="Third slide"

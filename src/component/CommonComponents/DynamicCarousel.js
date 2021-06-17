@@ -13,7 +13,7 @@ class DynamicCarousel extends Component {
     componentDidMount() {
         var array=[]
         for(var i=0;i<this.state.image.length;i++){
-            array.push(<Carousel.Item> <ImageLoader image={this.state.image[i]} category={this.props.category} length="1"/></Carousel.Item>)
+            array.push(<Carousel.Item className="h-100"> <ImageLoader image={this.state.image[i]} category={this.props.category} length="1"/></Carousel.Item>)
             
         }
         this.setState({
@@ -22,9 +22,9 @@ class DynamicCarousel extends Component {
     }
     render() {
         return (
-            <div>
+            <div className="h-100">
                 {this.state.image.length?
-                <Carousel>
+                <Carousel className="h-100">
                     {this.state.carouselItem}
                 </Carousel>
                 :null}

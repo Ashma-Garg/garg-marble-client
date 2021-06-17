@@ -25,8 +25,8 @@ class ViewComponent extends Component{
     render(){
         return(
             <div>
-                <Modal style={{minWidth:"90%",height:"90%"}} isOpen={this.state.isModal} toggle={this.toggleViewModal}>
-                    <ModalBody style={{height:"100%"}}>
+                <Modal style={{minWidth:"90%"}} className="h-75 mt-5" isOpen={this.state.isModal} toggle={this.toggleViewModal}>
+                    <ModalBody className="h-100">
                         {this.state.product}
                     </ModalBody>
                 </Modal>
