@@ -34,6 +34,7 @@ class Header extends Component {
         this.openProfile = this.openProfile.bind(this)
 
     }
+    //set username of customer or owner
     componentDidMount() {
         var elem = document.getElementsByClassName('dropdown-toggle')
         var i = elem.length - 1;
@@ -62,40 +63,37 @@ class Header extends Component {
             this.setState({
                 userName:"Owner"
             })
-            // axios.get(`/owner/`)
-            //     .then(res => {
-            //         if (res.data && res.data.FirstName) {
-            //             this.setState({
-            //                 userName: res.data.FirstName + " " + res.data.LastName
-            //             })
-            //         }
-            //     })
         }
     }
+    //navbar button to toggle navbar
     toggleNavbar() {
         this.setState({
             isNavbarOpen: !this.state.isNavbarOpen
         })
     }
+    //to toggle dropdown meanu
     toggle(id) {
         this.setState({
             [id]: !this.state[`${id}`]
         })
     }
+    //to toggle dropdown meanu
     onMouseEnter(id) {
         this.setState({
             [id]: !this.state[`${id}`]
         })
     }
+    //to toggle dropdown meanu
     onMouseLeave(id) {
         this.setState({
             [id]: !this.state[`${id}`]
         })
     }
-
+    //direct to another page(Washbasin, taps etc.)
     redirect(value) {
         window.location.href = `/${value}`
     }
+    //logout
     logout() {
         localStorage.removeItem("Ctoken")
         localStorage.removeItem("Otoken")
@@ -103,11 +101,13 @@ class Header extends Component {
             userName: null
         })
     }
+    //toggle login modal
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen
         })
     }
+    //when clicked on user icon to view user's profile
     openProfile() {
         window.location.href = `/profile`
     }

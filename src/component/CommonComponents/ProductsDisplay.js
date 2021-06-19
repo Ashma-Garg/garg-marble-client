@@ -21,17 +21,18 @@ class ProductDisplay extends Component {
     componentDidMount(){
 
         if(this.props.product.Customers){
-            this.props.product.Customers.map((customer)=>{
+            this.props.product.Customers.every((customer)=>{
                 if(customer==localStorage.getItem('Ctoken')){
                     this.setState({
                         color:"red"
                     })
-                    return;
+                    return false
                 }
                 else{
                     this.setState({
                         color:"lightgrey"
                     })
+                    return true;
                 }
             })
         }
@@ -41,8 +42,7 @@ class ProductDisplay extends Component {
         //start from toggleModal of AddModal(take reference from sidebar)
     }
     AddToWishlist(e) {
-        let productId=e.target.id;
-        productId=productId.substring(0,productId.length-6)
+        let productId=this.props.product._id
         let customerId=localStorage.getItem("Ctoken")
         let category=this.props.category
         if(customerId){        
@@ -85,7 +85,7 @@ class ProductDisplay extends Component {
     }
     render() {
         return (
-            <Col className="col-10 col-sm-5 col-lg-4 col-xl-2 m-1 m-auto m-sm-0 m-lg-auto m-xl-2" id={this.props.product._id + this.props.product.Name} key={this.props.key}>
+            <Col className="col-10 col-sm-5 col-lg-4 col-xl-2 m-1 m-auto m-sm-0 m-lg-auto m-xl-2" id={this.props.product._id + this.props.product.Name}>
 
                 {/* Will only be visible if window size is xs, sm */}
                 <Row onClick={()=>this.productDetail(this.props.product._id)} className="visibilityAccordance col-10 d-sm-none mt-5 pb-3">

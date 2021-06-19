@@ -13,6 +13,7 @@ class Confirm extends Component {
             msg:null
         }
     }
+    //confirm email and show if it has been confirmed or not
     componentDidMount() {
         let id=this.state.id
         let email=this.state.email

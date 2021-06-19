@@ -37,9 +37,9 @@ class Detail extends Component {
         this.AddToCart = this.AddToCart.bind(this)
     }
     async componentWillMount() {
+        //see if the product has already been added to cart 
         await axios.get(`${url}/customer/info/${localStorage.getItem("Ctoken")}`)
             .then(CustomerCart => {
-                console.log(CustomerCart)
                 if (CustomerCart.data.Bag && CustomerCart.data.Bag.length) {
                     for (let i = 0; i < CustomerCart.data.Bag.length; i++) {
                         if (CustomerCart.data.Bag[i].category === this.state.category && CustomerCart.data.Bag[i].productId === this.state.productId) {
@@ -64,6 +64,7 @@ class Detail extends Component {
                     })
                 }
             })
+        //display all info of product
         axios.get(`${url}/${this.state.category}/info/${this.state.productId}`)
             .then(res => {
                 this.setState({
@@ -84,6 +85,7 @@ class Detail extends Component {
                                     <h3>Size(Width * Height): {p.Size.Width}x{p.Size.Height}</h3>
                                     <div className="col-8 bg-warning m-auto"><p>Choose color to know your product price.</p></div>
                                     <Button onClick={this.AddToCart} id={p._id + "cart"} className={this.state.cartClass}><i className="fa fa-shopping-bag" aria-hidden="true"></i>{this.state.cart}</Button>
+                                    {/* see if the product has already been added to wishlist */}
                                     {
                                         p.Customers.map((customer) => {
                                             if (customer === localStorage.getItem("Ctoken")) {
@@ -117,12 +119,14 @@ class Detail extends Component {
                 })
             })
     }
+    //toggle full size screen display of image
     toggleViewModal(p) {
         this.setState({
             isModalOpen: !this.state.isModalOpen,
             product: p
         })
     }
+    //add product to wishlist
     AddToWIshlist(e) {
         const customerId = localStorage.getItem('Ctoken')
         let productId = e.target.id
@@ -169,12 +173,14 @@ class Detail extends Component {
             this.toggleModal()
         }
     }
+    //toggle Login Modal
     toggleModal() {
         this.setState({
             isLoginModal: !this.state.isLoginModal
         })
     }
 
+    //add product to cart
     AddToCart(e) {
 
         const customerId = localStorage.getItem('Ctoken')

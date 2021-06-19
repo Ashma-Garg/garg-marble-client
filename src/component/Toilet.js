@@ -51,6 +51,9 @@ class Toilet extends Component{
         })
     }
     toggleDeleteProductModal(val){
+        if (val === true) {
+            document.getElementById(this.state.DeleteProduct._id+this.state.DeleteProduct.Name).style.display="none"
+        }
         this.setState({
             isDeleteModalOpen: !this.state.isDeleteModalOpen,
             DeleteProduct:val
@@ -99,7 +102,7 @@ class Toilet extends Component{
                 </Row>
                 {this.state.isModalOpen && <Login isModalOpen={this.state.isModalOpen} toggleModal={()=>this.toggleModal()}/>}
                 {/* {this.state.isEditModalOpen && <AddModal  category={'toilet'} EditProduct={this.state.EditProduct} isModalOpen={this.state.isEditModalOpen} toggleAddModal={() => this.toggleEditProductModal()} />} */}
-                {this.state.isDeleteModalOpen && <DeleteModal category={'toilet'} DeleteProduct={this.state.DeleteProduct} isModalOpen={this.state.isDeleteModalOpen} toggleDeleteModal={() => this.toggleDeleteProductModal()}/>}
+                {this.state.isDeleteModalOpen && <DeleteModal category={'toilet'} DeleteProduct={this.state.DeleteProduct} isModalOpen={this.state.isDeleteModalOpen} toggleDeleteModal={(val) => this.toggleDeleteProductModal(val)}/>}
                 <SideBar category='toilet'/>
             </div>
         );

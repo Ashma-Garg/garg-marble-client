@@ -23,7 +23,7 @@ class Homepage extends Component {
     this.doneTyping = this.doneTyping.bind(this)
     this.searchResults = this.searchResults.bind(this)
   }
-
+  //triggers when user press any key
   searchProduct(e) {
     clearTimeout(this.state.typingTimer);
     if (e.search) {
@@ -32,6 +32,7 @@ class Homepage extends Component {
       })
     }
   }
+  //when user stops writing for 0.7 sec and matching results are fetched
   doneTyping() {
     let search = document.getElementById("globalsearch").value
     axios.post(`${url}/masterproducts/search`, { search })
@@ -44,9 +45,11 @@ class Homepage extends Component {
       })
     search ? document.getElementById("searchArray").style.display = "block" : document.getElementById("searchArray").style.display = "none";
   }
+  //clicked on any search results menu and render to that item's details page
   searchResultrenderto(category, id) {
     window.location.href = `/${category}/detail/${id}`
   }
+  //if clicked or submited search bar form then all matching results will be displayed
   searchResults() {
     document.getElementById("searchArray").style.display = "none";
     document.getElementById('openSearchResults').click()

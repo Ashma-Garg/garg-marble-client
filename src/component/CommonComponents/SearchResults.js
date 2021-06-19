@@ -24,6 +24,7 @@ class SearchResults extends Component {
             key: Number
         }
     }
+    //products got from link props
     componentDidMount() {
         if (this.props.history.location.state && this.props.history.location.state.sa.length) {
             this.setState({
@@ -39,8 +40,10 @@ class SearchResults extends Component {
                 search_Results:null
             })
         }
+        //so that when user refresh the page then there is no search string
         window.history.replaceState(window.location.pathname,null)
     }
+    //if search string is updated then update the product display
     componentDidUpdate() {
         if (this.props.history.location.state && (this.props.history.location.state.sa != this.state.search_Results_list)){
             this.setState({
@@ -56,16 +59,19 @@ class SearchResults extends Component {
         }
         window.history.replaceState(window.location.pathname,null)
     }
+    //if product details are not refreshed
     notRefreshed(res) {
         this.setState({
             notrefresh: res
         })
     }
+    //toggle login modal
     toggleModal() {
         this.setState({
             isModalOpen: !this.state.isModalOpen
         })
     }
+    //toggle delete momdal
     toggleDeleteProductModal(val) {
         if (val === true) {
             document.getElementById(this.state.DeleteProduct._id+this.state.DeleteProduct.Name).style.display="none"
@@ -75,6 +81,7 @@ class SearchResults extends Component {
             DeleteProduct: val
         })
     }
+    //add animation when product is added to wishlist
     addanimation(val, x, y) {
         this.setState({
             xCor: x,

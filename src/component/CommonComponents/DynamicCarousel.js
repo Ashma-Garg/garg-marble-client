@@ -10,6 +10,7 @@ class DynamicCarousel extends Component {
             carouselItem:[]
         }
     }
+    //create carousel for product's images
     componentDidMount() {
         var array=[]
         for(var i=0;i<this.state.image.length;i++){

@@ -12,7 +12,7 @@ class SearchBar extends Component {
     super(props)
     this.state = {
       typingTimer: 1,
-      doneTypingInterval: 1000,
+      doneTypingInterval: 700,
       searchArray: [],
       active: false
     }
@@ -21,26 +21,28 @@ class SearchBar extends Component {
     this.handleClickOutside = this.handleClickOutside.bind(this);
     this.searchResults = this.searchResults.bind(this)
   }
-
+  //if clicked anywhere then search menu should disappear
   componentDidMount() {
     document.addEventListener('mousedown', this.handleClickOutside);
   }
-
+  //if clicked anywhere then search menu should disappear
   componentWillUnmount() {
     document.removeEventListener('mousedown', this.handleClickOutside);
   }
+  //if clicked anywhere then search menu should disappear after .5sec 
   handleClickOutside(event) {
     setTimeout(()=>{
       document.getElementById("searchArray").style.display = "none"
-    },500)
-      
+    },500) 
   }
+  //triggers when user press any key
   searchProduct(e) {
     clearTimeout(this.state.typingTimer);
     this.setState({
       typingTimer: setTimeout(this.doneTyping, this.state.doneTypingInterval)
     })
   }
+  //when user stops writing for 0.7 sec and matching results are fetched
   doneTyping() {
     let search = document.getElementById("globalsearch").value
     axios.post(`${url}/masterproducts/search`, { search })
@@ -60,9 +62,11 @@ class SearchBar extends Component {
       })
     search ? document.getElementById("searchArray").style.display = "block" : document.getElementById("searchArray").style.display = "none";
   }
+  //clicked on any search results menu and render to that item's details page
   renderto(category, id) {
     window.open(`/${category}/detail/${id}`)
   }
+  //if clicked or submited search bar form then all matching results will be displayed
   searchResults() {
     document.getElementById("searchArray").style.display = "none";
     document.getElementById('openSearchResults').click()

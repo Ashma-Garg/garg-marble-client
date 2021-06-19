@@ -24,10 +24,10 @@ class DeleteModal extends Component {
     }
 
     async deleteProduct(){
-        await axios.delete(`${url}/${this.state.category}/delete/${this.state.DeleteProduct._id}`)
+        await axios.delete(`${url}/masterproducts/${this.state.category}/delete/${this.state.DeleteProduct._id}`)
         .then(res=>{
-            if(res.err){
-                console.log(res.err)
+            if(res.data.err){
+                console.log(res.data.err)
             }
             else if(res.data.msg){
                 alert(res.data.msg)
