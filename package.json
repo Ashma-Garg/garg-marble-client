@@ -16,6 +16,7 @@
     "react-dom": "^17.0.2",
     "react-image": "^4.0.3",
     "react-images-upload": "^1.2.8",
+    "react-notifications-component": "^3.1.0",
     "react-redux": "^7.2.2",
     "react-redux-form": "^1.16.14",
     "react-responsive-carousel": "^3.2.11",
@@ -29,7 +30,7 @@
     "socket.io-client": "^4.1.1",
     "web-vitals": "^0.2.4"
   },
-  "proxy": "https://garg-marble-server.herokuapp.com",
+  "proxy": "http://localhost:2409",
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",

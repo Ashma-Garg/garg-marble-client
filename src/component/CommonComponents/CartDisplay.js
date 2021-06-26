@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Row, Col } from 'reactstrap'
 
+import { url } from '../../shared/constant'
 import { ImageLoader } from '../FunctionalComponent/ImageLoader'
 import "../../css/Cart.css"
 import axios from 'axios'
@@ -50,7 +51,7 @@ class CartDisplay extends Component {
         let productId = this.props.product._id
         let category = this.props.category
         let cart = "Remove from Cart"
-        axios.post(`/customer/add/cart`, { customerId, productId, category, cart })
+        axios.post(`${url}/customer/add/cart`, { customerId, productId, category, cart })
             .then(res => {
                 if (!(res.data.error || res.err)) {
                     window.location.reload()

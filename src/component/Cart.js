@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import { Row, Col, Button } from 'reactstrap'
+import { store } from 'react-notifications-component';
 
 import {url} from '../shared/constant'
 
@@ -12,7 +13,15 @@ import SearchBar from './CommonComponents/SearchBar';
 // import socket from 'socket.io-client'
 
 // const io=socket('/')
-
+let notification = {
+    insert: "top",
+    container: "top-right",
+    animationIn: ["animate__animated", "animate__fadeIn"],
+    animationOut: ["animate__animated", "animate__fadeOut"],
+    dismiss: {
+        duration: 2000
+    }
+}
 class Cart extends Component {
     constructor(props) {
         super(props)
@@ -20,9 +29,11 @@ class Cart extends Component {
             data: [],
             isModalOpen: false,
             notrefresh: null,
-            total: 0
+            total: 0,
+            cartLength:Number
         }
         this.autoBagUpdate = this.autoBagUpdate.bind(this)
+        this.confirmorder=this.confirmorder.bind(this)
     }
 
     componentDidMount() {
@@ -34,6 +45,9 @@ class Cart extends Component {
                 .then(res => {
                     //this variable is so that we can use this cart array's value later in ProductDisplay category field 
                     let cart = res.data
+                    this.setState({
+                        cartLength:cart.length
+                    })
                     //this service is to find data for every prouct listed in cart
                     axios.all(res.data.map((cartData) => axios.get(`${url}/${cartData.category}/cartInfo/${cartData.productId}`)))
                         .then(axios.spread((...productsInfo) => {
@@ -81,7 +95,7 @@ class Cart extends Component {
     }
 
     //handles- when changes are made but not saved, it will save the changes automatically
-    autoBagUpdate() {
+    async autoBagUpdate() {
         let l = document.querySelectorAll("input[name=quantity]")
         let i = 0
         let customerId = localStorage.getItem("Ctoken")
@@ -91,7 +105,7 @@ class Cart extends Component {
             let quantity = l[i].value
             let productId = l[i].id
             total = total + (parseInt(price[i].innerHTML))
-            axios.post(`${url}/customer/cart/updateQuantity`, { customerId, productId, quantity })
+            await axios.post(`${url}/customer/cart/updateQuantity`, { customerId, productId, quantity })
                 .then(res => {
 
                 })
@@ -110,6 +124,35 @@ class Cart extends Component {
     }
     callSocketService(){
         // io.emit("raise","Socket Raised")
+    }
+    async confirmorder(){
+        await this.autoBagUpdate()
+        let customerId = localStorage.getItem("Ctoken")
+        let total=this.state.total
+        axios.post(`${url}/customer/confirmorder`,{customerId,total})
+        .then(res=>{
+            if(res.data.msg){
+                store.addNotification({
+                    ...notification,
+                    title: res.data.msg,
+                    message: "You can check your orders in MyOrders on Right hand side Navbar.",
+                    type: "success"
+                    
+                  });
+               document.getElementById('cart').style.display="none"
+               this.setState({
+                   total:0
+               })
+            }
+            else if(res.data.error){
+                store.addNotification({
+                    ...notification,
+                    title: "Order Not Confirmed!",
+                    message: res.data.error,
+                    type: "danger"
+                  });
+            }
+        })
     }
     notRefreshed(res) {
         this.setState({
@@ -144,11 +187,13 @@ class Cart extends Component {
                             <p className="ml-auto" style={{ color: "darkkhaki", fontWeight: "700" }}>Total: {this.state.total}</p>
                         </Col>
                     </Row>
+                    <div id="cart">
                     {this.state.data}
-
+                    </div>
                     {/* This button navigates to other location which will trigger autoUpdatebag automatically. */}
                     {/* <a href="/toilet">*/}
-                    <Button className="mt-3" onClick={()=>this.callSocketService()}>Confirm Order</Button>
+                    {/* <Button className="mt-3" onClick={()=>this.callSocketService()}>Confirm Order</Button> */}
+                    <Button disabled={this.state.cartLength===0?true:false} className="mt-3" onClick={this.confirmorder}>Confirm Order</Button>
                     {/*</a> */}
                     
                     <SideBar  hideAddProduct="true"/>

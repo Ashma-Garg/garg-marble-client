@@ -37,12 +37,14 @@ class SideBar extends Component{
                             <div className="backofarrow"></div>
                             <i className="fa fa-home fa-5x sidebarIcon" onClick={()=>this.jumpTo("/")}aria-hidden="true"></i><br/>
                             {(localStorage.getItem("Otoken") && !this.props.hideAddProduct)?
-                            <div><i className="fa fa-plus-circle fa-5x sidebarIcon" onClick={this.toggleModal} aria-hidden="true"></i></div>:null}
+                            <div><i className="fa fa-plus-circle fa-5x sidebarIcon" onClick={this.toggleModal} aria-hidden="true"></i><br/></div>:null}
                             
                             {!localStorage.getItem("Otoken")?
-                            <div><i className="fa fa-heart fa-5x sidebarIcon" onClick={()=>this.jumpTo("/wishlist")}aria-hidden="true"></i><br/>
-                            <i className="fa fa-user fa-5x sidebarIcon" onClick={()=>this.jumpTo("/profile")}aria-hidden="true"></i><br/>
-                            <i className="fa fa-shopping-cart fa-5x sidebarIcon" onClick={()=>this.jumpTo("/cart")}aria-hidden="true"></i><br/></div>:null}
+                            <div><i className="fa fa-heart fa-5x sidebarIcon" onClick={()=>this.jumpTo("/wishlist")} aria-hidden="true"></i><br/>
+                            <i className="fa fa-user fa-5x sidebarIcon" onClick={()=>this.jumpTo("/profile")} aria-hidden="true"></i><br/>
+                            <i className="fa fa-shopping-cart fa-5x sidebarIcon" onClick={()=>this.jumpTo("/cart")} aria-hidden="true"></i><br/>
+                            <i className="fa fa-car fa-4x sidebarIcon" onClick={()=>this.jumpTo("/orders")} aria-hidden="true"></i><br/></div>:<div>
+                            <i className="fa fa-car fa-4x sidebarIcon" onClick={()=>this.jumpTo("/owner/orders")} aria-hidden="true"></i><br/></div>}
                         </div>
                     </Col>
                 </Row>

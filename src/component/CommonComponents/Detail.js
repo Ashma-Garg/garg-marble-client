@@ -2,6 +2,7 @@ import React from 'react'
 import { Component } from 'react';
 import { Row, Col, Button } from 'reactstrap'
 import axios from 'axios'
+import { Tab, Tabs } from 'react-bootstrap';
 
 import {url} from '../../shared/constant'
 
@@ -11,7 +12,6 @@ import { ImageLoader } from '../FunctionalComponent/ImageLoader';
 import { ColorLoader } from '../FunctionalComponent/ColorLoader';
 import ViewModal from '../Modals/ViewModal'
 import Login from '../Login';
-import { Tab, Tabs } from 'react-bootstrap';
 import SearchBar from './SearchBar';
 
 import '../../css/Detail.css'

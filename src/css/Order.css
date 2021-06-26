@@ -1,0 +1,8 @@
+.controlHeight .image{
+    height:75px;
+}
+.imageBorder .image{
+    height:100%;
+    max-height:28vh;
+    border-radius: 1rem;
+}
