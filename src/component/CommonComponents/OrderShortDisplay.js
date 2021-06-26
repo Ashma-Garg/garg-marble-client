@@ -14,7 +14,8 @@ class OrderShortDisplay extends Component {
             Bag: this.props.Bag,
             displayProduct: null,
             productList: null,
-            Status:this.props.status
+            Status:this.props.status,
+            CustomerId:this.props.Bag.CustomerId?this.props.Bag.CustomerId:null
         }
         this.orderDetails = this.orderDetails.bind(this)
     }
@@ -42,7 +43,7 @@ class OrderShortDisplay extends Component {
     }
     orderDetails() {
         // document.getElementById("openOrderDetails").click()
-        window.location.href=`/order/detail/${this.state.Bag._id}?status=${this.state.Status}`
+        window.location.href=`/order/detail/${this.state.Bag._id}?status=${this.state.Status}&customer=${this.state.CustomerId}`
     }
     render() {
         return (

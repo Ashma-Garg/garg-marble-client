@@ -12,7 +12,7 @@ export function ImageLoader(props){
         <div style={{height:"100%"}} >
             {props.length==1?
             <img id={props.id} className="image col-md-12"
-            src={props.image!==null?image:require('../../images/Main.jpg').default}
+            src={props.image!==null?image:null}
             alt={props.image!==null?props.image:null}/>:
             <DynamicCarousel category={props.category} image={props.image}/>}
         </div>

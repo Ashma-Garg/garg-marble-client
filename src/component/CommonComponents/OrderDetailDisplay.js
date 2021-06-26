@@ -8,7 +8,7 @@ import { url } from '../../shared/constant';
 import SideNavbar from './SideNavbar';
 import SearchBar from './SearchBar';
 import SideBar from './SideBar';
-import {ImageLoader} from '../FunctionalComponent/ImageLoader'
+import { ImageLoader } from '../FunctionalComponent/ImageLoader'
 
 let notification = {
     insert: "top",
@@ -29,15 +29,18 @@ class OrderDetailDisplay extends Component {
             productList: null,
             BagItems: null,
             total: null,
-            Date: null
+            Date: null,
+            OrderCustomerId: null,
+            OrderCustomerDetails: null
         }
         this.cancelOrder = this.cancelOrder.bind(this)
     }
     async componentDidMount() {
-        const status=new URLSearchParams(window.location.search)
-        const s=status.get("status")
+        const status = new URLSearchParams(window.location.search)
+        const s = status.get("status")
         this.setState({
-            Status:s
+            Status: s,
+            OrderCustomerId: status.get("customer")
         })
         if (localStorage.getItem("Ctoken")) {
             if (s === 'pending') {
@@ -51,8 +54,8 @@ class OrderDetailDisplay extends Component {
                     })
             }
             else if (s === "placed") {
-                let status="Cancelled"
-                await axios.post(`${url}/customer/order/${this.state.customerId}/${this.state.orderId}`, {status})
+                let status = "Cancelled"
+                await axios.post(`${url}/customer/order/${this.state.customerId}/${this.state.orderId}`, { status })
                     .then(res => {
                         this.setState({
                             BagItems: res.data.Bag,
@@ -63,8 +66,24 @@ class OrderDetailDisplay extends Component {
             }
         }
         else if (localStorage.getItem("Otoken")) {
+            // console.log( + this.state.OrderCustomerId)
+            axios.get(`${url}/customer/info/${status.get("customer")}`)
+                .then(res => {
+                    console.log(res.data)
+
+                    this.setState({
+                        OrderCustomerDetails:
+                            <div style={{ textAlign: "left", overflowWrap: 'break-word' }}>
+                                <p className="p-0 m-0"><b>Email ID:</b> {res.data.EmailId}</p>
+                                <p className="p-0 m-0"><b>Name:</b> {res.data.FirstName} {res.data.LastName}</p>
+                                <p className="p-0 m-0"><b>Address:</b> {res.data.Address}, {res.data.City}, {res.data.State}, {res.data.Country}</p>
+                                <p className="p-0 m-0"><b>Pincode:</b> {res.data.Pincode}</p>
+                                <p className="p-0 m-0"><b>Phone No.</b> {res.data.PhoneNo}</p>
+                            </div>
+                    })
+                })
             if (s === "cancelled") {
-                let status="Cancelled"
+                let status = "Cancelled"
                 await axios.post(`${url}/owner/order/${this.state.orderId}`, { status })
                     .then(res => {
                         this.setState({
@@ -74,7 +93,7 @@ class OrderDetailDisplay extends Component {
                         })
                     })
             }
-            else if(s==='pending'){
+            else if (s === 'pending') {
                 await axios.get(`${url}/owner/order/${this.state.orderId}`)
                     .then(res => {
                         this.setState({
@@ -101,9 +120,9 @@ class OrderDetailDisplay extends Component {
         this.setState({
             orderExpandedDetails: this.state.productList.map((product, i) => {
                 return (
-                    <Col key={i + "key"} className="shadow-lg bg-dark col-12 m-3 p-1" onClick={() => this.productDetail(product.category, product._id)} style={{ border: "3px solid grey", borderRadius: "1rem", height: "fit-content" }}>
+                    <Col key={i + "key"} className="shadow-lg bg-dark col-12 col-md-6 mt-3" onClick={() => this.productDetail(product.category, product._id)} style={{ border: "3px solid grey", borderRadius: "1rem", height: "fit-content" }}>
                         <Row>
-                            <Col className="imageBorder">
+                            <Col className="imageBorder p-0">
                                 <ImageLoader category={product.category} image={product.Image[0] ? product.Image[0] : null} length={1} />
                             </Col>
                             <Col style={{ color: "white", fontWeight: "500" }}>
@@ -143,19 +162,23 @@ class OrderDetailDisplay extends Component {
                 <div>
                     <SideNavbar />
                     <SearchBar className="col-12" />
-                    <Row className="col-9 col-sm-10 p-0 ml-auto mr-auto" id="detailedOrder" style={{ marginLeft: "65px", marginTop: "7rem" }} >
+                    <Row className="col-9 col-sm-10 p-0 ml-md-auto mr-md-auto" id="detailedOrder" style={{ marginLeft: "70px", marginTop: "7rem" }} >
                         <Col className="col-6 text-wrap" style={{ textAlign: "left" }}>
                             <span style={{ color: "red", fontWeight: "600" }}>Order Number: </span><span style={{ fontWeight: "300", color: "navy", overflowWrap: 'break-word' }}>{this.state.orderId}</span>
                         </Col>
                         <Col className="col-6" style={{ textAlign: "right" }}>
                             <span style={{ color: "red", fontWeight: "600" }}>Date: </span><span style={{ fontWeight: "300", color: "navy" }}>{this.state.Date}</span>
                         </Col>
-                        {this.state.Status==='pending'?<Col className="col-12 mt-3" style={{ textAlign: "right" }}>
+                        {this.state.OrderCustomerId ?
+                            <Col className="col-6">
+                                {this.state.OrderCustomerDetails}
+                            </Col> : <Col className="col-6"></Col>}
+                        {this.state.Status === 'pending' ? <Col className="col-6 mt-3" style={{ textAlign: "right" }}>
                             <Button onClick={this.cancelOrder} className="btn btn-danger btn-md">Cancel Order</Button>
-                        </Col>:null}
+                        </Col> : <Col className="col-6"></Col>}
                         {this.state.orderExpandedDetails ? this.state.orderExpandedDetails : "No details"}
                     </Row>
-                    <SideBar />
+                    <SideBar hideAddProduct={true}/>
                 </div>
             )
         }
