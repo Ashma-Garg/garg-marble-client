@@ -5,7 +5,6 @@ import image from "../../images/Contact.jpg"
 import { LocalForm, Control, Error} from 'react-redux-form';
 import axios from 'axios'
 import {url} from '../../shared/constant'
-import {reset} from 'redux-form'
 
 export function ContactUs(){
     let submit=(e)=>{

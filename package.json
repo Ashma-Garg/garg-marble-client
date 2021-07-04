@@ -25,13 +25,12 @@
     "react-scripts": "4.0.1",
     "reactstrap": "^8.9.0",
     "redux": "^4.0.5",
-    "redux-form": "^8.3.7",
     "save": "^2.4.0",
     "serve": "^11.3.2",
     "socket.io-client": "^4.1.1",
     "web-vitals": "^0.2.4"
   },
-  "proxy": "http://localhost:2409",
+  "proxy": "https://garg-marble-server.herokuapp.com",
   "scripts": {
     "dev": "react-scripts start",
     "start": "serve -s build",
