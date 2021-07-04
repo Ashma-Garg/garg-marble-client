@@ -1,34 +1,81 @@
 .sliderr{
     font-size: 2.3rem;
-    /* position:absolute; */
-    /* top:70%; */
-    /* bottom: 20%; */
     z-index: 2;
     font-family: 'Berkshire Swash', cursive;
     color: white;
-    animation-name: slide;
+    animation-name: scaling;
     animation-duration:  2s;
     animation-iteration-count:initial;
     animation-fill-mode: forwards;
     width:100%;
+}.textSlide{
+    right:0;
+    color: grey;
+    text-align: center;
+    padding:30px;
+    font-family: Georgia, 'Times New Roman', Times, serif;
 }
+
+.annimate{
+    right: -20%;
+    animation-name: slide;
+    animation-duration:  2s;
+    opacity:0;
+    animation-iteration-count:initial;
+    animation-fill-mode: forwards;
+}
+@keyframes slide{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+        right: 0;
+    }
+}
+
+.textSlide2{
+    padding:30px;
+    left: -20%;
+    opacity:0;
+    color: grey;
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    
+}
+.annimate2{
+    animation-name: slide2;
+    animation-duration:  2s;
+    animation-iteration-count:initial;
+    animation-fill-mode: forwards;
+}
+@keyframes slide2{
+    from{
+        opacity:0;
+    }
+    to{
+        opacity:1;
+        left: 0;
+    }
+}
+ 
 .overlay{
-    width:98.5%;
-    height:77vh;
+    height:100%;
     position: absolute;
     z-index:1;
-    background-color: rgba(0,0,0,0.3);
+    background-color: rgba(0,0,0,0.4);
 }
 .mdbcolsd{
+    margin-top: 25vh;
     width:90%;
     color:white;
+    overflow: hidden;
     /* position:absolute; */
-    top:30vh;
     z-index:3;
     background: transparent;
 }
 
-@keyframes slide{
+@keyframes scaling{
     from{
         transform: scale(1.5);
     }
@@ -36,3 +83,11 @@
         transform: scale(1);
     }
 }
+ .termsHeading{
+     color: rgb(116, 112, 112);
+     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+ }
+ .termsUL li{
+    margin-top: 1rem;
+    font-family: 'Times New Roman', Times, serif;
+ }

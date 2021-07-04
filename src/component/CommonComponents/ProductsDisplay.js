@@ -137,9 +137,7 @@ class ProductDisplay extends Component {
                                     <p style={{margin:"0"}}>Rs. {this.props.product.Price}</p>
                                 </div>
                             </Col>
-                        </Row>
-                        <Row>
-                            <Col className="col-12">
+                            <Col>
                                 {localStorage.getItem("Otoken")?
                                 <div className="col-2 ml-auto"><i id={this.props.product._id+"edit"} onClick={this.deleteProduct} className="fa fa-trash fa-2x" style={{color:'red'}}></i></div>
                                 :
