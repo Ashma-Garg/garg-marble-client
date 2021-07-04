@@ -74,7 +74,11 @@ class SideNavbar extends React.Component {
         if (this.state.active) {
             let elem = document.getElementsByClassName("menu")
             elem[0].classList.remove("active");
-
+            this.setState({
+                dropdown1: false,
+                dropdown2: false,
+                dropdown3: false
+            })
             let e = document.getElementsByClassName("searchBar")
             e[0].classList.remove("col-9", "col-xl-8", "offset-3", "offset-xl-3")
             e[0].classList.add("col-10", "m-auto")
