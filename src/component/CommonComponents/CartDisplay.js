@@ -36,10 +36,37 @@ class CartDisplay extends Component {
     onchange(e) {
         let price = parseInt(document.getElementById(this.props.product._id + "disPrice").innerHTML)
         if (e.target) {
-            document.getElementById(this.props.product._id + "disPrice").innerHTML = (this.props.product.Price * (e.target.value ? e.target.value : 0))
+            if(e.target.value.match(/^[0-9]/) && parseInt(e.target.value)<=this.props.product.Quantity){
+                this.props.disableConfirmButton(false)
+                document.getElementById(this.props.product._id + "disPrice").innerHTML = (this.props.product.Price * (e.target.value ? e.target.value : 0))
+                document.getElementById(this.props.product._id + "errorMessage").classList.add("d-none")
+                document.getElementById(this.props.product._id + "outOfStockError").classList.add("d-none")
+            }
+            else{
+                this.props.disableConfirmButton(true)
+                document.getElementById(this.props.product._id + "disPrice").innerHTML = 0
+                
+                if(parseInt(e.target.value)>this.props.product.Quantity){
+                document.getElementById(this.props.product._id + "outOfStockError").classList.remove("d-none")
+                }
+                else{
+                    document.getElementById(this.props.product._id + "errorMessage").classList.remove("d-none")
+                }
+            }
+            
         }
         else {
-            document.getElementById(this.props.product._id + "disPrice").innerHTML = (this.props.product.Price * (e ? e : 0))
+            if(e<=this.props.product.Quantity){
+                this.props.disableConfirmButton(false)
+                document.getElementById(this.props.product._id + "disPrice").innerHTML = (this.props.product.Price * (e ? e : 0))
+                document.getElementById(this.props.product._id + "outOfStockError").classList.add("d-none")
+            }
+            else{
+                this.props.disableConfirmButton(true)
+                document.getElementById(this.props.product._id + "disPrice").innerHTML = 0
+                document.getElementById(this.props.product._id + "outOfStockError").classList.remove("d-none")
+            }
+            
         }
         let price1 = parseInt(document.getElementById(this.props.product._id + "disPrice").innerHTML)
         this.props.totalPrice(price, price1)
@@ -98,12 +125,18 @@ class CartDisplay extends Component {
                                         <div className="input-group-append">
                                             <i onClick={() => this.alterQuantity(1)} className="fa fa-plus" style={{ paddingRight: "3px", borderRight: "1px solid black" }}></i>
                                         </div>
-                                        <input style={{ height: "22px"}} onChange={this.onchange} name="quantity" id={this.props.product._id} type="number" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
+                                        <input style={{ height: "22px"}} onChange={this.onchange} name="quantity" id={this.props.product._id} type="text" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                         <div>
                                             <i onClick={() => this.alterQuantity(-1)} className="fa fa-minus" style={{ paddingLeft: "3px", borderLeft: "1px solid black" }}></i>
                                         </div>
                                     </div>
                                 </div>
+                        </div>
+                        <div className="text-danger d-none" style={{fontSize:'0.8rem'}} id={this.props.product._id + "errorMessage"}>
+                            Please enter positive value!
+                        </div>
+                        <div className="text-danger d-none" style={{fontSize:'0.8rem'}} id={this.props.product._id + "outOfStockError"}>
+                            Out of stock. Try small quantitty.
                         </div>
                     </div>
 
