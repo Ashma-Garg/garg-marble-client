@@ -12,7 +12,7 @@ class SearchBar extends Component {
     super(props)
     this.state = {
       typingTimer: 1,
-      doneTypingInterval: 700,
+      doneTypingInterval: 500,
       searchArray: [],
       active: false
     }
@@ -58,6 +58,7 @@ class SearchBar extends Component {
           this.setState({
             searchArray: []
           })
+          document.getElementById("searchArray").style.display = "none";
         }
       })
     search ? document.getElementById("searchArray").style.display = "block" : document.getElementById("searchArray").style.display = "none";

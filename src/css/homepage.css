@@ -67,10 +67,8 @@
 }
 .mdbcolsd{
     margin-top: 25vh;
-    width:90%;
     color:white;
     overflow: hidden;
-    /* position:absolute; */
     z-index:3;
     background: transparent;
 }

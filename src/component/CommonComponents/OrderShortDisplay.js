@@ -22,7 +22,6 @@ class OrderShortDisplay extends Component {
     async componentDidMount() {
         //this.state.bag was index of Bag- Bag contains list of products ordered within one porder
         //this is  to get info of products
-        console.log(this.state.Status)
         await axios.all(this.state.Bag.Bag.map((bagItems) => axios.get(`${url}/${bagItems.category}/product/${bagItems.productId}`)))
             .then(axios.spread((...productsInfo) => {
                 this.setState({
@@ -42,7 +41,6 @@ class OrderShortDisplay extends Component {
         })
     }
     orderDetails() {
-        // document.getElementById("openOrderDetails").click()
         window.location.href=`/order/detail/${this.state.Bag._id}?status=${this.state.Status}&customer=${this.state.CustomerId}`
     }
     render() {
@@ -59,16 +57,6 @@ class OrderShortDisplay extends Component {
                     <p className="p-0 m-0">Order Id: <span style={{fontWeight:"100",fontSize:"0.8rem",overflowWrap:'break-word'}}>{this.state.Bag._id}</span></p>
                     {this.state.Bag.Status?<p>Status: <span style={{fontWeight:"100",fontSize:"0.8rem",overflowWrap:'break-word'}}>{this.state.Bag.Status}</span></p>:null}
                 </Col>
-                {/* <Col>
-                <Link id="openOrderDetails"
-                to={{
-                  pathname: `/order/detail/${this.state.Bag._id}`,
-                  state: {
-                    status: "Cancelled",
-                  },
-                }}>{this.state.Status}
-                </Link>
-                </Col> */}
             </Row>
         )
     }

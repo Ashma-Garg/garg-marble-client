@@ -35,76 +35,87 @@ class OrderDetailDisplay extends Component {
         }
         this.cancelOrder = this.cancelOrder.bind(this)
     }
+    
     async componentDidMount() {
-        const status = new URLSearchParams(window.location.search)
-        const s = status.get("status")
+        const queryParams = new URLSearchParams(window.location.search)
+        const s=queryParams.get('status')
         this.setState({
-            Status: s,
-            OrderCustomerId: status.get("customer")
+            Status: queryParams.get("status"),
+            OrderCustomerId: queryParams.get("customer")
         })
         if (localStorage.getItem("Ctoken")) {
-            if (s === 'pending') {
-                await axios.get(`${url}/customer/order/${this.state.customerId}/${this.state.orderId}`)
-                    .then(res => {
-                        this.setState({
-                            BagItems: res.data.Bag,
-                            Date: res.data.OrderDate,
-                            total: res.data.Total
-                        })
-                    })
-            }
-            else if (s === "placed") {
-                let status = "Cancelled"
-                await axios.post(`${url}/customer/order/${this.state.customerId}/${this.state.orderId}`, { status })
-                    .then(res => {
-                        this.setState({
-                            BagItems: res.data.Bag,
-                            Date: res.data.OrderDate,
-                            total: res.data.Total
-                        })
-                    })
-            }
+            await this.orderOfCustomer(s)
         }
         else if (localStorage.getItem("Otoken")) {
-            // console.log( + this.state.OrderCustomerId)
-            axios.get(`${url}/customer/info/${status.get("customer")}`)
+           await this.orderOfSeller(queryParams)
+        }
+        
+       await this.getAllOrderItems()
+       await this.setDisplayOfOrderItems()
+        
+    }
+    async orderOfCustomer(s){
+        if (s === 'pending') {
+            await axios.get(`${url}/customer/order/${this.state.customerId}/${this.state.orderId}`)
                 .then(res => {
-                    console.log(res.data)
-
                     this.setState({
-                        OrderCustomerDetails:
-                            <div style={{ textAlign: "left", overflowWrap: 'break-word' }}>
-                                <p className="p-0 m-0"><b>Email ID:</b> {res.data.EmailId}</p>
-                                <p className="p-0 m-0"><b>Name:</b> {res.data.FirstName} {res.data.LastName}</p>
-                                <p className="p-0 m-0"><b>Address:</b> {res.data.Address}, {res.data.City}, {res.data.State}, {res.data.Country}</p>
-                                <p className="p-0 m-0"><b>Pincode:</b> {res.data.Pincode}</p>
-                                <p className="p-0 m-0"><b>Phone No.</b> {res.data.PhoneNo}</p>
-                            </div>
+                        BagItems: res.data.Bag,
+                        Date: res.data.OrderDate,
+                        total: res.data.Total
                     })
                 })
-            if (s === "cancelled") {
-                let status = "Cancelled"
-                await axios.post(`${url}/owner/order/${this.state.orderId}`, { status })
-                    .then(res => {
-                        this.setState({
-                            BagItems: res.data.Bag,
-                            Date: res.data.OrderDate,
-                            total: res.data.Total
-                        })
-                    })
-            }
-            else if (s === 'pending') {
-                await axios.get(`${url}/owner/order/${this.state.orderId}`)
-                    .then(res => {
-                        this.setState({
-                            BagItems: res.data.Bag,
-                            Date: res.data.OrderDate,
-                            total: res.data.Total
-                        })
-                    })
-            }
-
         }
+        else if (s === "placed") {
+            let status = "Cancelled"
+            await axios.post(`${url}/customer/order/${this.state.customerId}/${this.state.orderId}`, { status })
+                .then(res => {
+                    this.setState({
+                        BagItems: res.data.Bag,
+                        Date: res.data.OrderDate,
+                        total: res.data.Total
+                    })
+                })
+        }
+    }
+    async orderOfSeller(status){
+        let s=status.get("status")
+        axios.get(`${url}/customer/info/${status.get("customer")}`)
+        .then(res => {
+            this.setState({
+                OrderCustomerDetails:
+                    <div style={{ textAlign: "left", overflowWrap: 'break-word' }}>
+                        <p className="p-0 m-0"><b>Email ID:</b> {res.data.EmailId}</p>
+                        <p className="p-0 m-0"><b>Name:</b> {res.data.FirstName} {res.data.LastName}</p>
+                        <p className="p-0 m-0"><b>Address:</b> {res.data.Address}, {res.data.City}, {res.data.State}, {res.data.Country}</p>
+                        <p className="p-0 m-0"><b>Pincode:</b> {res.data.Pincode}</p>
+                        <p className="p-0 m-0"><b>Phone No.</b> {res.data.PhoneNo}</p>
+                    </div>
+            })
+        })
+    if (s === "cancelled") {
+        let status = "Cancelled"
+        await axios.post(`${url}/owner/order/${this.state.orderId}`, { status })
+            .then(res => {
+                this.setState({
+                    BagItems: res.data.Bag,
+                    Date: res.data.OrderDate,
+                    total: res.data.Total
+                })
+            })
+    }
+    else if (s === 'pending') {
+        await axios.get(`${url}/owner/order/${this.state.orderId}`)
+            .then(res => {
+                this.setState({
+                    BagItems: res.data.Bag,
+                    Date: res.data.OrderDate,
+                    total: res.data.Total
+                })
+            })
+    }
+
+    }
+    async getAllOrderItems(){
         await axios.all(this.state.BagItems.map((bagItems) => axios.get(`${url}/${bagItems.category}/product/${bagItems.productId}`)))
             .then(axios.spread((...productsInfo) => {
                 this.setState({
@@ -117,6 +128,8 @@ class OrderDetailDisplay extends Component {
                 })
 
             }))
+    }
+    setDisplayOfOrderItems(){
         this.setState({
             orderExpandedDetails: this.state.productList.map((product, i) => {
                 return (
@@ -174,7 +187,7 @@ class OrderDetailDisplay extends Component {
                                 {this.state.OrderCustomerDetails}
                             </Col> : <Col className="col-6"></Col>}
                         {this.state.Status === 'pending' ? <Col className="col-6 mt-3" style={{ textAlign: "right" }}>
-                            <Button onClick={this.cancelOrder} className="btn btn-danger btn-md">Cancel Order</Button>
+                            <Button onClick={this.cancelOrder} disabled={Math.round((new Date()-new Date(this.state.Date))/(1000*60*60*24))<3?false:true} className="btn btn-danger btn-md">Cancel Order</Button>
                         </Col> : <Col className="col-6"></Col>}
                         {this.state.orderExpandedDetails ? this.state.orderExpandedDetails : "No details"}
                     </Row>
