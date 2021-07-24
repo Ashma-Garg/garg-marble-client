@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { DropdownItem} from 'reactstrap';
+import { DropdownItem, Col} from 'reactstrap';
 
 import {url} from '../../shared/constant'
 
@@ -26,11 +26,14 @@ export function Brands(category){
                 //>
                     //{r}
                 //</DropdownItem>
-                <DropdownItem 
-                    style={{color:"white"}} 
+                <Col className="col-6">
+                    <DropdownItem
+                    style={{color:"white",fontSize:"0.8rem"}} 
                     onClick={()=>relocate(category,r)}>
                         {r}
                 </DropdownItem>
+                </Col>
+                
             );
         })
         Array.prototype.push.apply(array,setWash)

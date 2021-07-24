@@ -31,7 +31,8 @@ class Cart extends Component {
             notrefresh: null,
             total: 0,
             cartLength: Number,
-            isConfirmDisable: Boolean
+            isConfirmDisable: Boolean,
+            disable_array: []
         }
         this.autoBagUpdate = this.autoBagUpdate.bind(this)
         this.confirmorder = this.confirmorder.bind(this)
@@ -65,12 +66,16 @@ class Cart extends Component {
                             this.setState({
                                 //productsInfo is an array of all cart's product's items and that data is an array itself
                                 data: productsInfo.map((productInfo, i) => {
+                                    //initialize value of disable_array as false which says thart initially confirm button will not be disabled
+                                    this.state.disable_array.push(false)
                                     return (
-                                        productInfo.data.map(info => {
+                                        productInfo.data.map((info, index) => {
                                             //to get Total amount of products added in bag
-                                            this.setState({
-                                                total: this.state.total + (cart[i].Quantity * info.Price)
-                                            })
+                                            if (info.Quantity > 0) {
+                                                this.setState({
+                                                    total: this.state.total + (cart[i].Quantity * info.Price)
+                                                })
+                                            }
                                             if (info._id) {
                                                 return (<CartDisplay
                                                     totalPrice={(price, price1) => this.totalPrice(price, price1)}
@@ -78,7 +83,7 @@ class Cart extends Component {
                                                     notRefreshed={(res) => this.notRefreshed(res)}
                                                     quantity={cart[i].Quantity}
                                                     category={cart[i].category} product={info}
-                                                    disableConfirmButton={(isConfirmDisable) => this.disableConfirmButton(isConfirmDisable)} />)
+                                                    disableConfirmButton={(isConfirmDisable) => this.disableConfirmButton(isConfirmDisable, i)} />)
                                             }
                                         }))
                                 })
@@ -137,10 +142,31 @@ class Cart extends Component {
             total: this.state.total - price + price1
         })
     }
-    disableConfirmButton(isConfirmDisable) {
-        this.setState({
-            isConfirmDisable: isConfirmDisable
-        })
+
+    //array to check even if a single condition for a single cart item fails
+    disableConfirmButton(isConfirmDisable, index) {
+        this.state.disable_array.splice(index, 1, isConfirmDisable)
+        let i = 0, flag = 0;
+        while (i < this.state.disable_array.length) {
+            if (this.state.disable_array[i] === true) {
+                flag = 1
+                break
+            }
+            else {
+                flag = 0
+            }
+            i++;
+        }
+        if (flag == 0) {
+            this.setState({
+                isConfirmDisable: false
+            })
+        }
+        else {
+            this.setState({
+                isConfirmDisable: true
+            })
+        }
     }
     callSocketService() {
         // io.emit("raise","Socket Raised")

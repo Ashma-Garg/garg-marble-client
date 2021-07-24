@@ -16,7 +16,12 @@ class CartDisplay extends Component {
     }
     //to provide the inputs with quatities that were saved in db when user last visited the cart page
     componentDidMount() {
-        document.getElementById(this.props.product._id).value = this.props.quantity
+        if (this.props.product.Quantity) {
+            document.getElementById(this.props.product._id).value = this.props.quantity
+        }
+        else {
+            this.props.disableConfirmButton(true)
+        }
     }
 
     //to open Detail component
@@ -36,37 +41,37 @@ class CartDisplay extends Component {
     onchange(e) {
         let price = parseInt(document.getElementById(this.props.product._id + "disPrice").innerHTML)
         if (e.target) {
-            if(e.target.value.match(/^[0-9]/) && parseInt(e.target.value)<=this.props.product.Quantity){
+            if (e.target.value.match(/^[0-9]/) && parseInt(e.target.value) <= this.props.product.Quantity) {
                 this.props.disableConfirmButton(false)
                 document.getElementById(this.props.product._id + "disPrice").innerHTML = (this.props.product.Price * (e.target.value ? e.target.value : 0))
                 document.getElementById(this.props.product._id + "errorMessage").classList.add("d-none")
                 document.getElementById(this.props.product._id + "outOfStockError").classList.add("d-none")
             }
-            else{
+            else {
                 this.props.disableConfirmButton(true)
                 document.getElementById(this.props.product._id + "disPrice").innerHTML = 0
-                
-                if(parseInt(e.target.value)>this.props.product.Quantity){
-                document.getElementById(this.props.product._id + "outOfStockError").classList.remove("d-none")
+
+                if (parseInt(e.target.value) > this.props.product.Quantity) {
+                    document.getElementById(this.props.product._id + "outOfStockError").classList.remove("d-none")
                 }
-                else{
+                else {
                     document.getElementById(this.props.product._id + "errorMessage").classList.remove("d-none")
                 }
             }
-            
+
         }
         else {
-            if(e<=this.props.product.Quantity){
+            if (e <= this.props.product.Quantity) {
                 this.props.disableConfirmButton(false)
                 document.getElementById(this.props.product._id + "disPrice").innerHTML = (this.props.product.Price * (e ? e : 0))
                 document.getElementById(this.props.product._id + "outOfStockError").classList.add("d-none")
             }
-            else{
+            else {
                 this.props.disableConfirmButton(true)
                 document.getElementById(this.props.product._id + "disPrice").innerHTML = 0
                 document.getElementById(this.props.product._id + "outOfStockError").classList.remove("d-none")
             }
-            
+
         }
         let price1 = parseInt(document.getElementById(this.props.product._id + "disPrice").innerHTML)
         this.props.totalPrice(price, price1)
@@ -111,34 +116,35 @@ class CartDisplay extends Component {
                 </Col>
                 <Col>
                     <div style={{ position: "absolute", right: "30px" }}>
-                        <i onClick={() => this.deleteFromCart()} className="fa fa-trash" style={{ color: "red", right: 0 }}></i>
+                        <i onClick={() => this.deleteFromCart()} className="fa fa-trash" style={{ cursor: 'pointer', color: "red", right: 0 }}></i>
                     </div>
-                    <div style={{ position: "absolute", bottom: "20px" }}>
-                        <div style={{ color: "#b8184e", fontWeight: "700" }}>
-                            Price: <span id={this.props.product._id + "disPrice"} className={"cartPrice"}>{this.props.product.Price * this.props.quantity}</span>
-                        </div>
+                    {this.props.product.Quantity <= 0 ? <div className="w-100 outOfStockOverlay text-light">Out of Stock!</div> :
+                        <div style={{ position: "absolute", bottom: "20px" }}>
+                            <div style={{ color: "#b8184e", fontWeight: "700" }}>
+                                Price: <span id={this.props.product._id + "disPrice"} className={"cartPrice"}>{this.props.product.Price * this.props.quantity}</span>
+                            </div>
                             Quantity:
 
-                            <div style={{ display: "inline-block"}}>
+                            <div style={{ display: "inline-block" }}>
                                 <div className="p-1 bg-light rounded rounded-pill shadow-sm mb-4">
                                     <div className="input-group" style={{ width: '80px' }}>
                                         <div className="input-group-append">
                                             <i onClick={() => this.alterQuantity(1)} className="fa fa-plus" style={{ paddingRight: "3px", borderRight: "1px solid black" }}></i>
                                         </div>
-                                        <input style={{ height: "22px"}} onChange={this.onchange} name="quantity" id={this.props.product._id} type="text" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
+                                        <input style={{ height: "22px" }} onChange={this.onchange} name="quantity" id={this.props.product._id} type="text" aria-describedby="button-addon1" className="form-control border-0 bg-light" />
                                         <div>
                                             <i onClick={() => this.alterQuantity(-1)} className="fa fa-minus" style={{ paddingLeft: "3px", borderLeft: "1px solid black" }}></i>
                                         </div>
                                     </div>
                                 </div>
-                        </div>
-                        <div className="text-danger d-none" style={{fontSize:'0.8rem'}} id={this.props.product._id + "errorMessage"}>
-                            Please enter positive value!
-                        </div>
-                        <div className="text-danger d-none" style={{fontSize:'0.8rem'}} id={this.props.product._id + "outOfStockError"}>
-                            Out of stock. Try small quantitty.
-                        </div>
-                    </div>
+                            </div>
+                            <div className="text-danger d-none" style={{ fontSize: '0.8rem' }} id={this.props.product._id + "errorMessage"}>
+                                Please enter positive value!
+                            </div>
+                            <div className="text-danger d-none" style={{ fontSize: '0.8rem' }} id={this.props.product._id + "outOfStockError"}>
+                                Out of stock. Try small quantitty.
+                            </div>
+                        </div>}
 
                 </Col>
             </Row>

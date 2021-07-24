@@ -84,7 +84,7 @@ class Detail extends Component {
                                     </Row>
                                     <h3>Size(Width * Height): {p.Size.Width}x{p.Size.Height}</h3>
                                     <div className="col-8 bg-warning m-auto"><p>Choose color to know your product price.</p></div>
-                                    <Button onClick={this.AddToCart} id={p._id + "cart"} className={this.state.cartClass}><i className="fa fa-shopping-bag" aria-hidden="true"></i>{this.state.cart}</Button>
+                                    <Button disabled={p.Quantity<=0?true:false} onClick={this.AddToCart} id={p._id + "cart"} className={p.Quantity<=0?"col-8 btn btn-secondary btn-lg m-5":this.state.cartClass}><i className="fa fa-shopping-bag" aria-hidden="true"></i>{p.Quantity<=0?"Out of Stock":this.state.cart}</Button>
                                     {/* see if the product has already been added to wishlist */}
                                     {
                                         p.Customers.map((customer) => {

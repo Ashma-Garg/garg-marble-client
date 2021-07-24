@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router-dom'
 import {
-    UncontrolledDropdown, DropdownMenu, DropdownToggle, Navbar, NavItem, Collapse, NavLink, NavbarBrand, NavbarToggler, Nav
-    // ,Button,Row,Col
+    UncontrolledDropdown, DropdownMenu, DropdownToggle, Navbar, NavItem, Collapse, NavLink, NavbarBrand, NavbarToggler, Nav,
+    //Button,
+    Row
+    // ,Col
 } from 'reactstrap'
 import axios from 'axios'
 
@@ -78,15 +80,17 @@ class Header extends Component {
         })
     }
     //to toggle dropdown meanu
-    onMouseEnter(id) {
+    onMouseEnter(id,display) {
         this.setState({
-            [id]: !this.state[`${id}`]
+            [id]: !this.state[`${id}`],
+            [display]:"d-none d-sm-block"
         })
     }
     //to toggle dropdown meanu
-    onMouseLeave(id) {
+    onMouseLeave(id,display) {
         this.setState({
-            [id]: !this.state[`${id}`]
+            [id]: !this.state[`${id}`],
+            [display]:"d-none"
         })
     }
     //direct to another page(Washbasin, taps etc.)
@@ -126,14 +130,16 @@ class Header extends Component {
                                 <NavLink className="nav-link">
                                     <UncontrolledDropdown nav inNavbar
                                         direction="down"
-                                        onMouseEnter={() => this.onMouseEnter('dropdown1')}
-                                        onMouseLeave={() => this.onMouseLeave('dropdown1')}
+                                        onMouseEnter={() => this.onMouseEnter('dropdown1','display1')}
+                                        onMouseLeave={() => this.onMouseLeave('dropdown1','display1')}
                                         toggle={() => this.toggle('dropdown1')}
                                         isOpen={this.state.dropdown1}
                                     >
                                         <DropdownToggle onClick={() => this.redirect("washbasin")} className="drop1" style={{ backgroundColor: "#1c1b1b", color: "grey", borderStyle: "none" }} caret>Washbasin</DropdownToggle>
-                                        <DropdownMenu style={{ backgroundColor: "#414347" }}>
+                                        <DropdownMenu className={this.state['display1']} style={{ backgroundColor: "#414347",minWidth:'500px'}}>
+                                            <Row>
                                             {this.state.dropdownmenu}
+                                            </Row>
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </NavLink>
@@ -142,14 +148,16 @@ class Header extends Component {
                                 <NavLink className="nav-link">
                                     <UncontrolledDropdown nav inNavbar
                                         direction="down"
-                                        onMouseEnter={() => this.onMouseEnter('dropdown2')}
-                                        onMouseLeave={() => this.onMouseLeave('dropdown2')}
+                                        onMouseEnter={() => this.onMouseEnter('dropdown2','display2')}
+                                        onMouseLeave={() => this.onMouseLeave('dropdown2','display2')}
                                         toggle={() => this.toggle('dropdown2')}
                                         isOpen={this.state.dropdown2}
                                     >
                                         <DropdownToggle onClick={() => this.redirect("toilet")} className="drop2" style={{ backgroundColor: "#1c1b1b", color: "grey", borderStyle: "none" }} caret>Toilet</DropdownToggle>
-                                        <DropdownMenu style={{ backgroundColor: "#414347" }}>
+                                        <DropdownMenu className={this.state['display2']} style={{ backgroundColor: "#414347",minWidth:'500px'}}>
+                                            <Row>
                                             {this.state.dropdownmenu1}
+                                            </Row>
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </NavLink>
@@ -158,14 +166,16 @@ class Header extends Component {
                                 <NavLink className="nav-link">
                                     <UncontrolledDropdown nav inNavbar
                                         direction="down"
-                                        onMouseEnter={() => this.onMouseEnter('dropdown3')}
-                                        onMouseLeave={() => this.onMouseLeave('dropdown3')}
+                                        onMouseEnter={() => this.onMouseEnter('dropdown3','display3')}
+                                        onMouseLeave={() => this.onMouseLeave('dropdown3','display3')}
                                         toggle={() => this.toggle('dropdown3')}
                                         isOpen={this.state.dropdown3}
                                     >
                                         <DropdownToggle onClick={() => this.redirect("taps")} className="drop3" style={{ backgroundColor: "#1c1b1b", color: "grey", borderStyle: "none" }} caret>Taps</DropdownToggle>
-                                        <DropdownMenu style={{ backgroundColor: "#414347" }}>
+                                        <DropdownMenu className={this.state['display3']} style={{ backgroundColor: "#414347",minWidth:'500px'}}>
+                                            <Row>
                                             {this.state.dropdownmenu2}
+                                            </Row>
                                         </DropdownMenu>
                                     </UncontrolledDropdown>
                                 </NavLink>
