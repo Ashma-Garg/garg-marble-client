@@ -18,7 +18,9 @@ export function ContactUs() {
     return (
         <div>
             <Row className="col-12 col-sm-9 col-md-8 col-lg-6 col-xl-5 m-auto cardHeight">
-
+                <Col className="col-12">
+                    <p className="fontStyle">Bring your mouse over the card or click on it to view details.</p>
+                </Col>
                 <ReactCardFlip className="contentFitHeight" isFlipped={isFlipped} flipDirection="horizontal">
                     <div onMouseEnter={() => setIsFlipped(prev => !prev)} onClick={() => setIsFlipped(prev => !prev)} className="CardFront">
                         <div className="col-12 p-0">
